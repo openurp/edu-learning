@@ -1,0 +1,25 @@
+[#ftl]
+[#include "std_info.ftl"/]
+[#assign semesterNames={'1':'第一学期','2':'第二学期'}]
+[@b.grid items=grades var="grade" filterable="false" style="border:0.5px solid #006CB2"]
+  [@b.row]
+    [@b.col width="4%" title="序号"]${grade_index+1}[/@]
+    [@b.col width="180px" title="学年学期"]${grade.semester.schoolYear}学年 ${semesterNames[grade.semester.name]!grade.semester.name}[/@]
+    [@b.col title="课程名称"]${grade.course.name}[/@]
+
+    [@b.col width="5%" title="学分"]${(grade.course.getCredits(grade.std.level))!}[/@]
+    [@b.col title="修读类别" width="8%"]
+      [#if grade.courseTakeType?? && grade.courseTakeType.id !=1]
+      <span style="color:red;">${grade.courseTakeType.name}</span>
+      [#else]
+      ${grade.courseTakeType.name}
+      [/#if]
+      [#if grade.freeListening]<sup>免听</sup>[/#if][#t/]
+    [/@]
+    [#if grade?exists]
+    [#assign style][#if grade.published]${grade.passed?string("","color:red")}[/#if][/#assign]
+    [@b.col width="12%" title="成绩"][#if grade.published]${grade.scoreText!"--"}[#else]${b.text('grade.notPublished')}[/#if][/@]
+    [/#if]
+  [/@]
+[/@]
+<br>
