@@ -62,8 +62,8 @@
 }
 .mobile .m-content .m-line {
   width: 100%;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   border-bottom-width: 1px;
   border-bottom-style: solid;
   border-bottom-color: LightGrey;
@@ -114,4 +114,22 @@
   padding-left: 24px;
   padding-bottom: 1px;
   text-indent: -24px;
+}
+
+@media (min-width: 576px) {
+   .pc_content{
+      display:block;
+   }
+   .mobile_content{
+      display:none;
+   }
+}
+
+@media (max-width: 575px) {
+   .pc_content{
+      display:none;
+   }
+   .mobile_content{
+      display:block;
+   }
 }

@@ -1,9 +1,6 @@
 [#ftl/]
-[@b.head/]
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<link id="jquery_theme_link" rel="stylesheet" href="${b.base}/static/css/mobile.css?rn=1" type="text/css"/>
 <div class="mobile">
-  <div class="m-head">所有学期成绩</div>
+  <div class="m-head">${student.name}所有学期成绩</div>
   <div class="m-content">
     <div class="m-group-rows">
       [#list grades as grade]
@@ -19,4 +16,3 @@
     });
   });
 </script>
-[@b.foot/]

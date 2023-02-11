@@ -1,6 +1,7 @@
 [#ftl/]
 [@b.head/]
-<div class="container-fluid">
+<link id="jquery_theme_link" rel="stylesheet" href="${b.base}/static/css/mobile.css?rn=5" type="text/css"/>
+<div class="container-fluid pc_content">
   [@b.toolbar title="计划完成情况"]
     bar.addPrint();
   [/@]
@@ -45,4 +46,5 @@
     尚无您的计划完成情况。
   [/#if]
 </div>
+[#include "mobileIndex.ftl"/]
 [@b.foot/]
