@@ -23,10 +23,10 @@ ThisBuild / developers := List(
 ThisBuild / description := "OpenURP Edu Learning"
 ThisBuild / homepage := Some(url("http://openurp.github.io/edu-learning/index.html"))
 
-val openurp_edu_api = "org.openurp.edu" % "openurp-edu-api" % "0.31.0.Beta1"
-val openurp_stater_web = "org.openurp.starter" % "openurp-starter-web" % "0.2.7"
-val openurp_base_tag = "org.openurp.base" % "openurp-base-tag" % "0.2.6"
-val openurp_edu_core = "org.openurp.edu" % "openurp-edu-core" % "0.0.4-SNAPSHOT"
+val openurp_edu_api = "org.openurp.edu" % "openurp-edu-api" % "0.31.0.Beta2"
+val openurp_stater_web = "org.openurp.starter" % "openurp-starter-web" % "0.2.10"
+val openurp_base_tag = "org.openurp.base" % "openurp-base-tag" % "0.3.3"
+val openurp_edu_core = "org.openurp.edu" % "openurp-edu-core" % "0.0.4"
 
 lazy val root = (project in file("."))
   .settings()

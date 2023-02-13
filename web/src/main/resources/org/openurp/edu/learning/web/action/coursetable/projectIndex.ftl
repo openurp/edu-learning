@@ -3,7 +3,7 @@
 <div class="container-fluid">
 <script language="JavaScript" type="text/JavaScript" src="${b.base}/static/edu/TaskActivity.js?v=20210313"></script>
 [@b.toolbar title="我的课表"/]
-[@urp_base.semester_bar value=semester! formName='courseTableForm']
+[@base.semester_bar value=semester! formName='courseTableForm']
   <label class="title">课表类型:</label>
   <input type="hidden" name="projectId" value="${student.project.id}">
   <input type="hidden" name="setting.category" value="${setting.category}">

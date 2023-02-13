@@ -26,11 +26,10 @@ class DefaultModule extends BindModule {
 
   override def binding(): Unit = {
     bind(classOf[DefaultClazzProvider])
-    bind(classOf[DefaultCourseGradeProvider])
+    bind(classOf[DefaultExamTakerProvider])
 
     bind(classOf[DefaultCoursePlanProvider])
     bind(classOf[DefaultProgramProvider])
     bind(classOf[DefaultAlternativeCourseProvider])
-    bind(classOf[DefaultExamTakerProvider])
   }
 }
