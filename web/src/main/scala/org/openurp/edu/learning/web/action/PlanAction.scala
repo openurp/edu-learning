@@ -97,7 +97,7 @@ class PlanAction extends StudentSupport {
   private def getSharePlan(std: Student): Option[SharePlan] = {
     val query = OqlBuilder.from(classOf[SharePlan], "sp")
     query.where("sp.project=:project", std.project)
-    query.where(" sp.eduType =:eduType", std.level, std.eduType)//sp.level=:level and
+    query.where("sp.level=:level and sp.eduType =:eduType", std.level, std.eduType)
     query.where(":grade between sp.fromGrade.code and sp.toGrade.code", std.state.get.grade.code)
     entityDao.search(query).headOption
   }

@@ -2,9 +2,12 @@
 <cdi>
   <container>
     <module class="org.openurp.starter.web.ProjectModule"/>
-    <module class="org.openurp.edu.learning.service.DefaultModule"/>
-    <module class="org.openurp.edu.grade.service.impl.DefaultBindModule"/>
-    <module class="org.openurp.edu.grade.service.impl.ConfigBindModule"/>
+
+    <module class="org.openurp.edu.clazz.service.DefaultModule"/>
+    <module class="org.openurp.edu.progarm.service.DefaultModule"/>
+    <module class="org.openurp.edu.grade.service.DefaultModule"/>
+    <module class="org.openurp.edu.grade.service.ConfigModule"/>
+
     <module class="org.openurp.edu.learning.web.action.DefaultModule"/>
     <module class="org.openurp.edu.learning.web.ws.DefaultModule"/>
   </container>
