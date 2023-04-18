@@ -44,7 +44,7 @@ class CourseTypeAction extends StudentSupport with EntityAction[CourseTypeChange
   }
 
   def applyForm(): View = {
-    val me = getStudent()
+    val me = getStudent
     put("std", me)
     this.coursePlanProvider.getCoursePlan(me) foreach { plan =>
       //登记成绩中出现课程
@@ -68,7 +68,7 @@ class CourseTypeAction extends StudentSupport with EntityAction[CourseTypeChange
 
   def doApply(): View = {
     val apply = populateEntity(classOf[CourseTypeChangeApply], "apply")
-    apply.std = getStudent()
+    apply.std = getStudent
     apply.updatedAt = Instant.now
     if apply.approved.contains(true) then
       redirect("index", "不能修改已经通过的申请")
@@ -78,7 +78,7 @@ class CourseTypeAction extends StudentSupport with EntityAction[CourseTypeChange
   }
 
   def remove(): View = {
-    val id = longId("apply")
+    val id = getLongId("apply")
     val apply = entityDao.get(classOf[CourseTypeChangeApply], id)
     if apply.approved.contains(true) then
       return redirect("index", "不能删除已经审核通过的申请")

@@ -38,7 +38,7 @@ class ExamtableAction extends StudentSupport {
 
   protected override def projectIndex(std: Student): View = {
     val project = std.project
-    val semester = getSemester()
+    val semester = getSemester
     val courseTakers = clazzProvider.getClazzes(semester, std)
 
     val finalTakers = Collections.newMap[CourseTaker, ExamTaker]

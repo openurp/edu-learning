@@ -53,7 +53,7 @@ class AlternativeAction extends StudentSupport with EntityAction[AlternativeAppl
   }
 
   def applyForm(): View = {
-    val std = getStudent()
+    val std = getStudent
     put("std", std)
     put("planCourses", planCourses(std))
     put("gradeCourses", gradeCourses(std))
@@ -68,7 +68,7 @@ class AlternativeAction extends StudentSupport with EntityAction[AlternativeAppl
       }
     }
     val spQuery = OqlBuilder.from(classOf[SharePlan], "sp")
-    spQuery.where("sp.project=:project and sp.level=:level", std.project, std.level.toLevel)
+    spQuery.where("sp.project=:project and sp.level=:level", std.project, std.level)
     spQuery.where(":grade between sp.fromGrade and sp.toGrade", std.state.get.grade)
     entityDao.search(spQuery) foreach { sp =>
       for (cg <- sp.groups; planCourse <- cg.planCourses) {
@@ -84,9 +84,9 @@ class AlternativeAction extends StudentSupport with EntityAction[AlternativeAppl
 
   def doApply(): View = {
     val apply = populateEntity(classOf[AlternativeApply], "apply")
-    apply.std = getStudent()
+    apply.std = getStudent
 
-    val project = getProject()
+    val project = getProject
     val originIdStr = get("originIds", "") // 原课程代码串
     val substituteIdStr = get("substituteIds", "") // 替换课程代码串
     fillCourse(project, apply.olds, originIdStr)
@@ -153,7 +153,7 @@ class AlternativeAction extends StudentSupport with EntityAction[AlternativeAppl
   }
 
   def remove(): View = {
-    val id = longId("apply")
+    val id = getLongId("apply")
     val apply = entityDao.get(classOf[AlternativeApply], id)
     if (apply.approved.contains(true)) return redirect("index", "不能删除已经审核通过的申请")
     val me = Securities.user

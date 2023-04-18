@@ -33,7 +33,7 @@ class NoticeAction extends StudentSupport {
   var clazzProvider: ClazzProvider = _
 
   protected override def projectIndex(std: Student): View = {
-    val semester = getSemester()
+    val semester = getSemester
     val clazzes = clazzProvider.getClazzes(semester, std).map(_.clazz)
     val notices = getQueryBuilder(clazzes)
     put("notices", notices)

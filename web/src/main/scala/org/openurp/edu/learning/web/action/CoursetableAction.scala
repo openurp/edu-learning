@@ -50,7 +50,7 @@ class CoursetableAction extends StudentSupport {
   var timeSettingService: TimeSettingService = _
 
   protected override def projectIndex(std: Student): View = {
-    val semester = getSemester()
+    val semester = getSemester
     val timeSetting = timeSettingService.get(std.project, semester, Some(std.state.get.campus))
     put("semester", semester)
     val weekIndex = get("weekIndex", "*")

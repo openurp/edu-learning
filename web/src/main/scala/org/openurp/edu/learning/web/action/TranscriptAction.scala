@@ -29,7 +29,6 @@ import org.openurp.edu.grade.service.TranscriptTemplateService
 import org.openurp.edu.grade.service.impl.SpringTranscriptDataProviderRegistry
 import org.openurp.starter.web.support.StudentSupport
 
-
 class TranscriptAction extends StudentSupport {
   var transcriptTemplateService: TranscriptTemplateService = _
 

@@ -17,7 +17,7 @@
 </table>
 </div>
 [#macro groupsData courseGroups,lastNum]
-  [#list courseGroups as group]
+  [#list courseGroups?sort_by('indexno') as group]
     <tr class="darkColumn" style="font-weight: bold">
       <td colspan="3" style="padding-left: 5px;text-align: left;">[#list 1..lastNum as d][/#list]${sg.next(lastNum)}&nbsp;${(group.name)?if_exists}[#if (group.children?size>0)]<span style="font-weight: normal">([#if (group.groupRelation.relation)?default('and')='and']所有子项均应满足要求[#else]所有子项至少一项满足要求[/#if])</span>[/#if]</td>
       <td align="center">${(group.auditStat.requiredCredits)?default('')}</td>
@@ -30,7 +30,7 @@
       </td>
       <td align="center">&nbsp;</td>
     </tr>
-     [#list group.courseResults as courseResult]
+     [#list group.courseResults?sort_by(["course","code"]) as courseResult]
      [#local coursePassed=courseResult.passed/]
      <tr>
          <td align="center">${courseResult_index+1}</td>
