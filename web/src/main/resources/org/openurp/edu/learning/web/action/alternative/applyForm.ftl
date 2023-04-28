@@ -12,11 +12,11 @@
     [@b.field label="学号" required='true']${std.code} ${std.name}    [/@]
     [@b.select label="原课程(计划内)" name="originIds" items=planCourses required='true'
                option=r"${item.name} (${item.code} ${item.getCredits(student.level)}学分)"
-               comment="计划中的课程" style="width:500px;" multiple="true"/]
+               comment="计划中的课程" style="width:500px;" multiple="true" chosenMin="1"/]
 
     [@b.select label="替代课程(有成绩)" name="substituteIds" items=gradeCourses required='true'
                option=r"${item.name} (${item.code} ${item.getCredits(student.level)}学分)"
-               comment="成绩中的课程" style="width:500px;" multiple="true"/]
+               comment="成绩中的课程" style="width:500px;" multiple="true" chosenMin="1"/]
     [@b.textarea name='apply.remark' label='备注' cols="46" rows="2" value="${(apply.remark?html)!}" required="true" maxlength="200" comment="最多200字"/]
     [@b.formfoot]
         <input type="hidden" name="projectId" value="${std.project.id}"/>

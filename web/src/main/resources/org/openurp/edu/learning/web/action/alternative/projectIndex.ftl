@@ -36,6 +36,6 @@
   [@b.form name="applyForm" action="!applyForm"]
     <input name="projectId" value="${project.id}" type="hidden"/>
   [/@]
-  <div style="margin:auto;text-align: center;"><button onclick="apply()" class="btn btn-primary">开始申请</button></div>
+  <div style="margin:auto;margin-top:10px;text-align: center;"><button onclick="apply()" class="btn btn-primary">开始申请</button></div>
 </div>
 [@b.foot /]
