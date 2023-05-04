@@ -53,13 +53,11 @@ class PlanAction extends StudentSupport {
       put("hasProgramDoc", false)
       put("sharePlan", getSharePlan(std))
 
-      coursePlanProvider.getExecutionPlan(std) foreach { executionPlan =>
-        if executionPlan.program.status == AuditStatus.Passed then
-          val builder = OqlBuilder.from(classOf[ProgramDoc], "pd")
-          builder.where("pd.program =:program", executionPlan.program)
-          val docs = entityDao.search(builder)
-          put("hasProgramDoc", docs.nonEmpty)
-      }
+      if plan.program.status == AuditStatus.Passed then
+        val builder = OqlBuilder.from(classOf[ProgramDoc], "pd")
+        builder.where("pd.program =:program", plan.program)
+        val docs = entityDao.search(builder)
+        put("hasProgramDoc", docs.nonEmpty)
     }
     put("ems_base", Ems.base)
     put("enableLinkCourseInfo", projectPropertyService.get(project, Features.ProgramLinkCourseEnabled, false))

@@ -173,9 +173,9 @@
 [#-- 计划课程的一格一格的学分信息 --]
 [#macro planCourseCreditInfo planCourse]
     [#list plan.startTerm..plan.endTerm as i]
-            <td class="credit_hour">
-                [#if planCourse.terms?exists && (","+planCourse.terms+",")?contains(","+i+",")]√[#else]&nbsp;[/#if]
-            </td>
+      <td class="credit_hour">
+          [#if planCourse.terms.contains(i)]${planCourse.course.getCredits(planCourse.group.plan.program.level)!}[#else]&nbsp;[/#if]
+      </td>
     [/#list]
 [/#macro]
 
@@ -204,6 +204,10 @@
         [/#list]
     [/#if]
 [/#macro]
+[#macro courseGroupEmptyInfo courseGroup]
+  [#list 1..maxTerm as t]<td class="credit_hour">&nbsp;</td>[/#list]
+[/#macro]
+
 [#-- 计划课程的一格一格的周课时信息 --]
 [#macro planCourseWeekHoursInfo planCourse]
     [#list plan.startTerm..plan.endTerm as i]
@@ -217,18 +221,19 @@
         <tr>
             [@drawAllAncestor courseGroup /]
             <td class="credit_hour">${courseGroup.credits}</td>
+            <td class="credit_hour">${courseGroup.creditHours!}</td>
             [@groupTermInfoMacro courseGroup /]
-            <td>&nbsp;</td>
             <td class="credit_hour">&nbsp;${courseGroup.remark!}</td>
         </tr>
     [#else]
-        [#list courseGroup.planCourses?sort_by(['course', 'code'])?sort_by(['terms']) as planCourse]
+        [#list courseGroup.children?sort_by("indexno") as child]
+            [@drawGroup child courseTermInfoMacro groupTermInfoMacro/]
+        [/#list]
+        [#list courseGroup.orderedPlanCourses as planCourse]
             [#assign courseCount = courseCount + 1]
         <tr>
             [@drawAllAncestor courseGroup /]
-
-            [#-- 存在非叶子节点的子组 add on 2012-04-11 --]
-            [#local exists_nonleaf_child = false /]
+            [#local exists_nonleaf_child = false /] [#-- 存在非叶子节点的子组 add on 2012-04-11 --]
             [#list courseGroup.children as c]
                 [#if !isLeaf(c) ][#local exists_nonleaf_child=true /][#break][/#if]
             [/#list]
@@ -239,24 +244,24 @@
             <td class="course">&nbsp;${planCourse.course.code!}</td>
             <td class="course">&nbsp;${courseCount}&nbsp;[@displayCourse courseGroup.plan,planCourse.course/]</td>
             <td class="credit_hour">${planCourse.course.getCredits(courseGroup.plan.program.level)!}</td>
+            <td class="credit_hour">${planCourse.course.creditHours}</td>
             [@courseTermInfoMacro planCourse /]
-            <td class="credit_hour">${planCourse.department.name}</td>
-            <td>[#if planCourse.compulsory && !courseGroup.autoAddup]必修 [/#if][#if planCourse.remark?exists]${planCourse.remark!}[#else]&nbsp;[/#if]</td>
+            <td class="credit_hour">[#if planCourse.compulsory && !courseGroup.autoAddup]必修 [/#if][#if planCourse.remark?exists]${planCourse.remark!}[#else]&nbsp;[/#if]</td>
         </tr>
         [/#list]
-        [#list courseGroup.children?sort_by("indexno") as child]
-            [@drawGroup child courseTermInfoMacro groupTermInfoMacro/]
-        [/#list]
+        [#if courseGroup.parent?? && courseGroup.autoAddup && courseGroup.children?size==0]
+        [#else]
         <tr>
             [@drawAllAncestor courseGroup /]
             <td colspan="${mustSpan + maxFenleiSpan - HierarchyFenleiSpanSum(maxFenleiSpan, courseGroup)}" class="credit_hour summary">
                 [#if courseGroup.autoAddup]学分小计[#else]<font color="#1F3D83">应修学分</font>[/#if]
             </td>
             <td class="credit_hour summary">[#if courseGroup.autoAddup]${courseGroup.credits}[#else]<font color="#1F3D83">${courseGroup.credits}</font>[/#if]</td>
+            <td class="credit_hour summary">${courseGroup.creditHours}</td>
             [@groupTermInfoMacro courseGroup /]
-            <td>&nbsp;</td>
             <td class="credit_hour">&nbsp;${courseGroup.remark!}</td>
         </tr>
+        [/#if]
     [/#if]
 [/#macro]
 

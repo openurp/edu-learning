@@ -9,14 +9,16 @@
 <div class="container-fluid" style="width:95%">
     <table id="planInfoTable${plan.id}" name="planInfoTable${plan.id}" class="planTable"  style="font-size:12px;vnd.ms-excel.numberformat:@" width="100%">
         [#assign maxTerm=plan.terms /]
+        [#assign courseTypeWidth=5*maxFenleiSpan/]
+        [#if courseTypeWidth>15][#assign courseTypeWidth=15/][/#if]
         <thead>
             <tr align="center">
-                <td rowspan="2" colspan="${maxFenleiSpan}" width="10%">分类</td>
-                <td rowspan="2" width="9%">课程代码</td>
-                <td rowspan="2" width="26%">课程名称</td>
+                <td rowspan="2" colspan="${maxFenleiSpan}" width="${courseTypeWidth}%">分类</td>
+                <td rowspan="2" width="10%">课程代码</td>
+                <td rowspan="2">课程名称</td>
                 <td rowspan="2" width="5%">学分</td>
-                <td colspan="${maxTerm}" width="25%">按学期学分分配</td>
-                <td rowspan="2" width="15%">开课院系</td>
+                <td rowspan="2" width="5%">学时</td>
+                <td colspan="${maxTerm}" width="30%">各学期学分分布</td>
                 <td rowspan="2" width="10%">备注</td>
             </tr>
             <tr>
@@ -30,23 +32,24 @@
         <tbody>
         [#list plan.groups?sort_by("indexno") as courseGroup]
           [#if !courseGroup.parent??]
-            [@drawGroup courseGroup planCourseCreditInfo courseGroupCreditInfo/]
+            [@drawGroup courseGroup planCourseCreditInfo courseGroupEmptyInfo/]
           [/#if]
         [/#list]
-            [#-- 绘制总计 --]
             <tr>
                 <td class="summary" colspan="${maxFenleiSpan + mustSpan}">全程总计</td>
                 <td class="credit_hour summary">${plan.credits!(0)}</td>
+                <td class="credit_hour summary">&nbsp;[#--学时--]</td>
             [#list plan.startTerm..plan.endTerm as i]
                 <td class="credit_hour">${total_term_credit[i?string]}</td>
             [/#list]
                 <td>&nbsp;</td>
-                <td>&nbsp;</td>
             </tr>
+            [#if plan.program.remark??]
             <tr>
                 <td align="center" colspan="${maxFenleiSpan + 1}">备注</td>
                 <td colspan="${5 + maxTerm}">&nbsp;${(plan.program.remark?html)!}</td>
             </tr>
+            [/#if]
         </tbody>
     </table>
 </div>
