@@ -334,7 +334,7 @@ mustSpan:${mustSpan}
     [#if plan.std??]
     ${plan.std.level.name}&nbsp;${(plan.std.stdType.name)!}&nbsp;${(plan.std.state.department.name)!}&nbsp;${plan.std.state.major.name}<br>${(plan.std.state.direction.name + "&nbsp;")!} ${plan.std.name}个人培养计划(${plan.std.state.grade})
     [#else]
-    ${plan.program.level.name}&nbsp;${plan.program.stdType.name}&nbsp;${plan.program.department.name}&nbsp;${plan.program.major.name}<br>${(plan.program.direction.name + "&nbsp;")!} 专业培养计划(${plan.program.grade})
+    ${plan.program.level.name}&nbsp;${plan.program.department.name}&nbsp;${plan.program.major.name}<br>${(plan.program.direction.name + "&nbsp;")!} 专业培养计划(${plan.program.grade})
     [/#if]
 </p>
 [/#macro]

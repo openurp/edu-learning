@@ -18,7 +18,7 @@
                 <td rowspan="2">课程名称</td>
                 <td rowspan="2" width="5%">学分</td>
                 <td rowspan="2" width="5%">学时</td>
-                <td colspan="${maxTerm}" width="30%">各学期学分分布</td>
+                <td colspan="${maxTerm}" width="${maxTerm*3.5}%">各学期学分分布</td>
                 <td rowspan="2" width="10%">备注</td>
             </tr>
             <tr>
