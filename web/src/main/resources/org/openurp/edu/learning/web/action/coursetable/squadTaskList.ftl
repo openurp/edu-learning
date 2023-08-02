@@ -21,7 +21,7 @@
     [/@]
     [@b.col width="12%" property="remark" title="备注"]
        ${clazz.remark!}
-      [#list clazz.schedule.sessions as s]${(s.places)!}[#sep]&nbsp;[/#list]
+      [#list clazz.schedule.activities as s]${(s.places)!}[#sep]&nbsp;[/#list]
     [/@]
   [/@]
 [/@]
