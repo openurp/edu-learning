@@ -13,13 +13,13 @@
       <th width="20%">备注</th>
     </tr>
   </thead>
-  [@groupsData planAuditResult.topGroupResults,1/]
+  [@groupsData planAuditResult.topGroupResults?sort_by('indexno'),1/]
 </table>
 </div>
 [#macro groupsData courseGroups,lastNum]
-  [#list courseGroups?sort_by('indexno') as group]
+  [#list courseGroups as group]
     <tr class="darkColumn" style="font-weight: bold">
-      <td colspan="3" style="padding-left: 5px;text-align: left;">[#list 1..lastNum as d][/#list]${sg.next(lastNum)}&nbsp;${(group.name)?if_exists}[#if (group.children?size>0)]<span style="font-weight: normal">([#if (group.groupRelation.relation)?default('and')='and']所有子项均应满足要求[#else]所有子项至少一项满足要求[/#if])</span>[/#if]</td>
+      <td colspan="3" style="padding-left: 5px;text-align: left;">[#list 1..lastNum as d][/#list]${sg.next(lastNum?int)}&nbsp;${(group.name)?if_exists}[#if (group.children?size>0)]<span style="font-weight: normal">[#if (group.groupRelation.relation)?default('and')!='and'](所有子项至少一项满足要求)[/#if]</span>[/#if]</td>
       <td align="center">${(group.auditStat.requiredCredits)?default('')}</td>
       <td align="center">${(group.auditStat.passedCredits)?default('')} [#if ((group.auditStat.convertedCredits)>0)](转换${(group.auditStat.convertedCredits)}学分)[/#if]</td>
       <td></td>
@@ -44,8 +44,8 @@
      </tr>
      [/#list]
       [#if (group.children?size!=0)]
-      ${sg.reset(lastNum+1)}
-      [@groupsData group.children,lastNum+1/]
+      ${sg.reset((lastNum+1)?int)}
+      [@groupsData group.children?sort_by('indexno'),lastNum+1/]
     [/#if]
   [/#list]
 [/#macro]

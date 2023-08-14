@@ -9,12 +9,12 @@
   [#if planAuditResult??]
   <table align="center" class="infoTable">
    <tr>
-    <td class="title" width="18%">学号:</td>
-    <td class="content" width="18%">${std.code}</td>
-    <td class="title" width="18%">姓名:</td>
-    <td class="content" width="18%">${std.name}</td>
-    <td class="title" width="18%">年级:</td>
-    <td class="content" width="18%">${std.state.grade!}</td>
+    <td class="title" width="15%">学号:</td>
+    <td class="content" width="20%">${std.code}</td>
+    <td class="title" width="15%">姓名:</td>
+    <td class="content" width="20%">${std.name}</td>
+    <td class="title" width="10%">年级:</td>
+    <td class="content" width="20%">${std.state.grade!}</td>
    </tr>
    <tr>
     <td class="title">培养层次:</td>

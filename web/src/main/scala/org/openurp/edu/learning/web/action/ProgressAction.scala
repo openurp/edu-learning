@@ -19,9 +19,8 @@ package org.openurp.edu.learning.web.action
 
 import org.beangle.commons.text.seq.SeqNumStyle.{ARABIC, HANZI}
 import org.beangle.commons.text.seq.{MultiLevelSeqGenerator, SeqNumStyle, SeqPattern}
-import org.beangle.data.dao.{EntityDao, OqlBuilder}
+import org.beangle.data.dao.OqlBuilder
 import org.beangle.web.action.view.View
-import org.openurp.base.service.SemesterService
 import org.openurp.base.std.model.Student
 import org.openurp.edu.grade.model.PlanAuditResult
 import org.openurp.starter.web.support.StudentSupport

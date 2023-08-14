@@ -17,17 +17,37 @@
       <div class="m-line"><span class="l-caption">院系意见：</span><span class="l-value">${(planAuditResult.departOpinion)!}</span></div>
       <div class="m-line"><span class="l-caption">主管部门意见：</span><span class="l-value">${(planAuditResult.finalOpinion)!}</span></div>
       [/#if]
-      <div class="m-line"><span class="l-caption">审核结果：</span><span class="l-value">${planAuditResult.passed?string("通过","<font color='red'>未通过</font>")}&nbsp;${(planAuditResult.partial?string('预审，有在读课程',''))!}</span></div>
+      <div class="m-line"><span class="l-caption">审核结果：</span><span class="l-value">${planAuditResult.passed?string("通过","<font color='red'>未通过</font>")}&nbsp;${(planAuditResult.partial?string('预审,有在读课程',''))!}</span></div>
       <div class="m-line"><span class="l-caption">审核时间：</span><span class="l-value">${(planAuditResult.updatedAt?string('yyyy-MM-dd HH:mm:ss'))!}</span></div>
     </div>
     <div class="m-item"><span class="m-item-title">二、具体情况</span><span class="m-item-more fa fa-angle-left pull-right menu-open"></span></div>
     <div class="m-content">
-      [#list planAuditResult.topGroupResults as group]
-      <div class="m-group"><span class="l-group-title">${group_index + 1}.&nbsp;${group.name}<br><span style="font-weight: normal">要求<span class="en_char">${group.auditStat.requiredCredits}</span>分，完成<span class="en_char">${group.auditStat.passedCredits}</span>分[#if group.auditStat.convertedCredits gt 0][转换<span class="en_char">${group.auditStat.convertedCredits}</span>学分][/#if]，
-        [#if group.passed]通过[#else]<span style="color:red">未通过</span>[#if group.auditStat.requiredCredits gt group.auditStat.passedCredits + group.auditStat.convertedCredits]，<span style="color:red">缺<span class="en_char">${group.auditStat.requiredCredits - group.auditStat.passedCredits - group.auditStat.convertedCredits}</span>分</span>[/#if][#if group.auditStat.requiredCount gt group.auditStat.passedCount]，<span style="color:red">缺<span class="en_char">${group.auditStat.requiredCount - group.auditStat.passedCount}</span>门</span>[/#if][/#if]</span></span><span class="l-group-more fa fa-angle-left pull-right"></span>[#if (group.children?size>0)]<div class="l-group-remark">([#if (group.groupRelation.relation)?default("and")=="and"]所有子项均应满足要求[#else]所有子项至少一项满足要求[/#if])</div>[/#if]</div>
+      [#list planAuditResult.groupResults?sort_by('indexno') as group]
+      <div class="m-group">
+        <span class="l-group-title">${group.indexno}.${group.name}<br>
+          <span style="font-weight: normal">要求${group.auditStat.requiredCredits}分,完成${group.auditStat.passedCredits}分
+          [#if group.auditStat.convertedCredits gt 0][转换<span class="en_char">${group.auditStat.convertedCredits}</span>学分][/#if],
+          [#if group.passed]
+            通过
+          [#else]
+            <span style="color:red">未通过</span>
+            [#if group.auditStat.requiredCredits > group.auditStat.passedCredits + group.auditStat.convertedCredits],
+            <span style="color:red">缺${group.auditStat.requiredCredits - group.auditStat.passedCredits - group.auditStat.convertedCredits}分</span>
+            [/#if]
+            [#if group.auditStat.requiredCount > group.auditStat.passedCount]
+             ,<span style="color:red">缺${group.auditStat.requiredCount - group.auditStat.passedCount}门</span>
+            [/#if]
+          [/#if]
+          </span>
+        </span>
+        [#if group.courseResults?size>0]<span class="l-group-more fa fa-angle-left pull-right"></span>[/#if]
+        [#if (group.children?size>0)]
+        <div class="l-group-remark">[#if (group.groupRelation.relation)?default("and")!="and"](所有子项至少一项满足要求)[/#if]</div>
+        [/#if]
+      </div>
       <div class="m-group-rows close">
-        [#list group.courseResults as courseResult]
-        <div class="m-line m-multi-row"><span class="l-no">${courseResult_index + 1})</span><span class="l-caption">${courseResult.course.name}</span><span class="l-value"><span class="en_char">${courseResult.course.defaultCredits}</span>分，<span class="en_char">${(courseResult.scores?trim)!"--"}</span> ${courseResult.passed?string("通过", "<span style=\"color:red\">未过</span>")}</span>${("<br>备注：" + courseResult.remark)!}</span></div>
+        [#list group.courseResults?sort_by(["course","code"]) as courseResult]
+        <div class="m-line m-multi-row"><span class="l-no">${courseResult_index + 1})</span><span class="l-caption">${courseResult.course.name}</span><span class="l-value"><span class="en_char">${courseResult.course.defaultCredits}</span>分,<span class="en_char">${(courseResult.scores?trim)!"--"}</span> ${courseResult.passed?string("通过", "<span style=\"color:red\">未过</span>")}</span>${("<br>备注：" + courseResult.remark)!}</span></div>
         [/#list]
       </div>
       [/#list]
