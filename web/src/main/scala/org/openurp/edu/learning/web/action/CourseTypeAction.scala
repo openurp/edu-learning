@@ -94,8 +94,9 @@ class CourseTypeAction extends StudentSupport with EntityAction[CourseTypeChange
       if g.planCourses.isEmpty then // 1. without courses
         types.add(g.courseType)
       else if !g.autoAddup && g.courseType.optional then // 2. with some courses
-        val sum = g.planCourses.map(_.course.getCredits(std.level)).sum
-        if sum < g.credits then types.add(g.courseType)
+//        val sum = g.planCourses.map(_.course.getCredits(std.level)).sum
+//        if sum < g.credits then
+        types.add(g.courseType)
     }
     types
   }

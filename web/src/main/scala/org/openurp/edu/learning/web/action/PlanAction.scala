@@ -20,19 +20,16 @@ package org.openurp.edu.learning.web.action
 import org.beangle.commons.collection.Collections
 import org.beangle.commons.lang.Strings
 import org.beangle.commons.text.seq.{HanZiSeqStyle, RomanSeqStyle, SeqPattern}
-import org.beangle.data.dao.{EntityDao, OqlBuilder}
+import org.beangle.data.dao.OqlBuilder
 import org.beangle.ems.app.Ems
 import org.beangle.web.action.context.ActionContext
-import org.beangle.web.action.support.ActionSupport
 import org.beangle.web.action.view.View
 import org.openurp.base.model.{AuditStatus, Project}
-import org.openurp.base.service.{ProjectPropertyService, SemesterService}
 import org.openurp.base.std.model.Student
 import org.openurp.code.edu.model.TeachingNature
-import org.openurp.code.service.CodeService
 import org.openurp.edu.Features
 import org.openurp.edu.program.domain.{AlternativeCourseProvider, CoursePlanProvider}
-import org.openurp.edu.program.model.{ExecutionPlan, Program, ProgramDoc, SharePlan}
+import org.openurp.edu.program.model.{Program, ProgramDoc, SharePlan}
 import org.openurp.starter.web.support.StudentSupport
 
 class PlanAction extends StudentSupport {
@@ -42,13 +39,16 @@ class PlanAction extends StudentSupport {
   var alternativeCourseProvider: AlternativeCourseProvider = _
 
   protected override def projectIndex(std: Student): View = {
-    val project = std.project
+    given project: Project = std.project
+
     coursePlanProvider.getCoursePlan(std) foreach { plan =>
       val majorAlternativeCourses = alternativeCourseProvider.getMajorAlternatives(std)
       val stdAlternativeCourses = alternativeCourseProvider.getStdAlternatives(std)
       put("plan", plan)
       put("teachingNatures", codeService.get(classOf[TeachingNature])) //展示多类课时
-      put("majorAlternativeCourses", majorAlternativeCourses)
+      if (getProjectProperty("edu.program.major_alternative.show2std", true)) {
+        put("majorAlternativeCourses", majorAlternativeCourses)
+      }
       put("stdAlternativeCourses", stdAlternativeCourses)
       put("hasProgramDoc", false)
       put("sharePlan", getSharePlan(std))
@@ -60,7 +60,7 @@ class PlanAction extends StudentSupport {
         put("hasProgramDoc", docs.nonEmpty)
     }
     put("ems_base", Ems.base)
-    put("enableLinkCourseInfo", projectPropertyService.get(project, Features.ProgramLinkCourseEnabled, false))
+    put("enableLinkCourseInfo", getProjectProperty(Features.ProgramLinkCourseEnabled, false))
     forward()
   }
 

@@ -39,7 +39,8 @@
          <td align="center">${(courseResult.course.getCredits(std.level))?default('')}</td>
          <td align="center">[#if coursePassed]${(courseResult.course.getCredits(std.level))?default('')}[#else]0[/#if]</td>
          <td align="center">${courseResult.scores!}</td>
-         <td align="center">${courseResult.passed?string("是","<font color='red'>否</font>")}</td>
+         <td align="center">
+           [#if courseResult.scores!='--' && !courseResult.passed]${courseResult.passed?string("是","<font color='red'>否</font>")}[/#if]</td>
          <td align="center">${courseResult.remark?if_exists}</td>
      </tr>
      [/#list]
