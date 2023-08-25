@@ -29,16 +29,8 @@
     <td class="content">${std.state.major.name}&nbsp;${(std.state.direction.name)!}</td>
     <td class="title">要求学分/实修学分:</td>
     <td class="content">${planAuditResult.auditStat.requiredCredits}&nbsp;/&nbsp;${planAuditResult.auditStat.passedCredits}</td>
-    <td class="title">GPA:</td>
-    <td class="content">${(planAuditResult.gpa)?default("0")}</td>
-   </tr>
-   <tr>
     <td class="title">更新时间:</td>
     <td class="content">${(planAuditResult.updatedAt?string('yyyy-MM-dd HH:mm:ss'))!}
-    <td class="title">备注:</td>
-    <td class="content" colspan="3">
-      ${(planAuditResult.remark?html)!} [#if !(planAuditResult.id?exists)]<font color="red">该完成情况，不作为最终审核结果</font>[/#if]
-    </td>
    </tr>
   </table>
   [#include "resultTable.ftl" /]

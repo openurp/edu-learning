@@ -46,12 +46,15 @@
             </tr>
             [#if plan.program.remark??]
             <tr>
-                <td align="center" colspan="${maxFenleiSpan + 1}">备注</td>
-                <td colspan="${5 + maxTerm}">&nbsp;${(plan.program.remark?html)!}</td>
+                <td align="center" colspan="${maxFenleiSpan}">备注</td>
+                [#-- 5= 代码+名称+学时+学分+备注--]
+                  [#assign remark = plan.program.remark?replace("\r","")/]
+                <td style="padding-left: 10px;line-height: 1.5rem;" colspan="${5 + (plan.endTerm - plan.startTerm + 1)}">${remark?replace('\n','<br>')}</td>
             </tr>
             [/#if]
         </tbody>
     </table>
+    <br><br>
 </div>
 <script>
 [@mergeCourseTypeCell plan teachPlanLevels 2/]

@@ -1,7 +1,7 @@
 [#ftl]
 [@b.head/]
 [@b.messages /]
-<link rel="stylesheet" type="text/css" href="${b.base}/static/css/plan.css?v=20220810" />
+<link rel="stylesheet" type="text/css" href="${b.base}/static/css/plan.css?v=20220811" />
 [#if plan??]
 [#include "planFunctions.ftl" /]
 [#assign maxTerm = plan.terms /]

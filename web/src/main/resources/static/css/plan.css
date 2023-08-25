@@ -42,6 +42,7 @@
 
 .planTable tbody tr td.leaf_group {
   vertical-align: middle;
+  text-align:center;
 }
 
 .treeTable tbody tr td.groupButton {

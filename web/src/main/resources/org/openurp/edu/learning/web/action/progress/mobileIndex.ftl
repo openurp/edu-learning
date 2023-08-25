@@ -12,12 +12,12 @@
       <div class="m-line"><span class="l-caption">院系：</span><span class="l-value">${planAuditResult.std.state.department.name}</span></div>
       <div class="m-line"><span class="l-caption">专业/方向：</span><span class="l-value">${planAuditResult.std.state.major.name}${("/" + planAuditResult.std.state.direction.name)!}</span></div>
       <div class="m-line"><span class="l-caption">要求学分/实修学分：</span><span class="l-value">${planAuditResult.auditStat.requiredCredits}&nbsp;/&nbsp;${planAuditResult.auditStat.passedCredits}</span></div>
-      <div class="m-line"><span class="l-caption">GPA：</span><span class="l-value">${(planAuditResult.gpa)?default("0")}</span></div>
+      [#if (planAuditResult.gpa)?default(0)>0]<div class="m-line"><span class="l-caption">GPA：</span><span class="l-value">${(planAuditResult.gpa)?default("0")}</span></div>[/#if]
       [#if planAuditResult.archived]
       <div class="m-line"><span class="l-caption">院系意见：</span><span class="l-value">${(planAuditResult.departOpinion)!}</span></div>
       <div class="m-line"><span class="l-caption">主管部门意见：</span><span class="l-value">${(planAuditResult.finalOpinion)!}</span></div>
       [/#if]
-      <div class="m-line"><span class="l-caption">审核结果：</span><span class="l-value">${planAuditResult.passed?string("通过","<font color='red'>未通过</font>")}&nbsp;${(planAuditResult.partial?string('预审,有在读课程',''))!}</span></div>
+      [#if planAuditResult.passed]<div class="m-line"><span class="l-caption">审核结果：</span><span class="l-value">通过</span></div>[/#if]
       <div class="m-line"><span class="l-caption">审核时间：</span><span class="l-value">${(planAuditResult.updatedAt?string('yyyy-MM-dd HH:mm:ss'))!}</span></div>
     </div>
     <div class="m-item"><span class="m-item-title">二、具体情况</span><span class="m-item-more fa fa-angle-left pull-right menu-open"></span></div>
@@ -26,11 +26,10 @@
       <div class="m-group">
         <span class="l-group-title">${group.indexno}.${group.name}<br>
           <span style="font-weight: normal">要求${group.auditStat.requiredCredits}分,完成${group.auditStat.passedCredits}分
-          [#if group.auditStat.convertedCredits gt 0][转换<span class="en_char">${group.auditStat.convertedCredits}</span>学分][/#if],
+          [#if group.auditStat.convertedCredits gt 0][转换<span class="en_char">${group.auditStat.convertedCredits}</span>学分][/#if]
           [#if group.passed]
-            通过
+            ,通过
           [#else]
-            <span style="color:red">未通过</span>
             [#if group.auditStat.requiredCredits > group.auditStat.passedCredits + group.auditStat.convertedCredits],
             <span style="color:red">缺${group.auditStat.requiredCredits - group.auditStat.passedCredits - group.auditStat.convertedCredits}分</span>
             [/#if]
@@ -47,7 +46,7 @@
       </div>
       <div class="m-group-rows close">
         [#list group.courseResults?sort_by(["course","code"]) as courseResult]
-        <div class="m-line m-multi-row"><span class="l-no">${courseResult_index + 1})</span><span class="l-caption">${courseResult.course.name}</span><span class="l-value"><span class="en_char">${courseResult.course.defaultCredits}</span>分,<span class="en_char">${(courseResult.scores?trim)!"--"}</span> ${courseResult.passed?string("通过", "<span style=\"color:red\">未过</span>")}</span>${("<br>备注：" + courseResult.remark)!}</span></div>
+        <div class="m-line m-multi-row"><span class="l-no">${courseResult_index + 1})</span><span class="l-caption">${courseResult.course.name}</span><span class="l-value"><span class="en_char">${courseResult.course.defaultCredits}</span>分,<span class="en_char">${(courseResult.scores?trim)!"--"}</span>${("<br>备注：" + courseResult.remark)!}</span></div>
         [/#list]
       </div>
       [/#list]

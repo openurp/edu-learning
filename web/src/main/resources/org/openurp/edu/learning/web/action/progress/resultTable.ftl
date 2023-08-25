@@ -16,6 +16,7 @@
   [@groupsData planAuditResult.topGroupResults?sort_by('indexno'),1/]
 </table>
 </div>
+<br><br>
 [#macro groupsData courseGroups,lastNum]
   [#list courseGroups as group]
     <tr class="darkColumn" style="font-weight: bold">
