@@ -4,19 +4,13 @@
   <div class="m-body">
     <div class="m-item"><span class="m-item-title">一、基础信息</span><span class="m-item-more fa fa-angle-left pull-right menu-open"></span></div>
     <div class="m-content">
-      <div class="m-line"><span class="l-caption">学号：</span><span class="l-value">${planAuditResult.std.code}</span></div>
-      <div class="m-line"><span class="l-caption">姓名：</span><span class="l-value">${planAuditResult.std.name}</span></div>
+      <div class="m-line"><span class="l-caption">学生：</span><span class="l-value">${planAuditResult.std.code} ${planAuditResult.std.name}</span></div>
       <div class="m-line"><span class="l-caption">年级：</span><span class="l-value">${planAuditResult.std.state.grade}</span></div>
       <div class="m-line"><span class="l-caption">培养层次：</span><span class="l-value">${planAuditResult.std.level.name}</span></div>
-      <div class="m-line"><span class="l-caption">学生类别：</span><span class="l-value">${planAuditResult.std.stdType.name}</span></div>
       <div class="m-line"><span class="l-caption">院系：</span><span class="l-value">${planAuditResult.std.state.department.name}</span></div>
       <div class="m-line"><span class="l-caption">专业/方向：</span><span class="l-value">${planAuditResult.std.state.major.name}${("/" + planAuditResult.std.state.direction.name)!}</span></div>
       <div class="m-line"><span class="l-caption">要求学分/实修学分：</span><span class="l-value">${planAuditResult.auditStat.requiredCredits}&nbsp;/&nbsp;${planAuditResult.auditStat.passedCredits}</span></div>
       [#if (planAuditResult.gpa)?default(0)>0]<div class="m-line"><span class="l-caption">GPA：</span><span class="l-value">${(planAuditResult.gpa)?default("0")}</span></div>[/#if]
-      [#if planAuditResult.archived]
-      <div class="m-line"><span class="l-caption">院系意见：</span><span class="l-value">${(planAuditResult.departOpinion)!}</span></div>
-      <div class="m-line"><span class="l-caption">主管部门意见：</span><span class="l-value">${(planAuditResult.finalOpinion)!}</span></div>
-      [/#if]
       [#if planAuditResult.passed]<div class="m-line"><span class="l-caption">审核结果：</span><span class="l-value">通过</span></div>[/#if]
       <div class="m-line"><span class="l-caption">审核时间：</span><span class="l-value">${(planAuditResult.updatedAt?string('yyyy-MM-dd HH:mm:ss'))!}</span></div>
     </div>

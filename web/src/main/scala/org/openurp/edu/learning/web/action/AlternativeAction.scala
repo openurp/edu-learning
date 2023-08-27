@@ -19,19 +19,17 @@ package org.openurp.edu.learning.web.action
 
 import org.beangle.commons.collection.Collections
 import org.beangle.commons.lang.Strings
-import org.beangle.data.dao.{EntityDao, OqlBuilder}
+import org.beangle.data.dao.OqlBuilder
 import org.beangle.security.Securities
 import org.beangle.web.action.view.View
 import org.beangle.webmvc.support.action.EntityAction
 import org.openurp.base.edu.model.Course
 import org.openurp.base.model.Project
 import org.openurp.base.std.model.Student
-import org.openurp.code.service.CodeService
 import org.openurp.edu.grade.domain.CourseGradeProvider
-import org.openurp.edu.grade.model.CourseGrade
 import org.openurp.edu.learning.app.model.AlternativeApply
 import org.openurp.edu.program.domain.{AlternativeCourseProvider, CoursePlanProvider}
-import org.openurp.edu.program.model.{CoursePlan, SharePlan, StdAlternativeCourse}
+import org.openurp.edu.program.model.{SharePlan, StdAlternativeCourse}
 import org.openurp.starter.web.support.StudentSupport
 
 import java.time.Instant
@@ -54,13 +52,23 @@ class AlternativeAction extends StudentSupport with EntityAction[AlternativeAppl
 
   def applyForm(): View = {
     val std = getStudent
+
+    given project: Project = std.project
+
     put("std", std)
-    put("planCourses", planCourses(std))
-    put("gradeCourses", gradeCourses(std))
+    val pcourses = planCourses(std)
+
+    val scores = gradeScores(std)
+    val hasGrade = pcourses.filter(scores.contains)
+    pcourses --= hasGrade
+    put("planCourses", pcourses)
+    put("gradeCourses", scores.keySet)
+    put("scores", scores)
+    put("multiple_enabled", getProjectProperty("edu.program.alternative_apply_multiple_enabled", true))
     forward()
   }
 
-  private def planCourses(std: Student): collection.Seq[Course] = {
+  private def planCourses(std: Student): collection.mutable.Buffer[Course] = {
     val courses = Collections.newSet[Course]
     coursePlanProvider.getCoursePlan(std) foreach { plan =>
       for (courseGroup <- plan.groups; planCourse <- courseGroup.planCourses) {
@@ -78,8 +86,15 @@ class AlternativeAction extends StudentSupport with EntityAction[AlternativeAppl
     courses.toBuffer.sortBy(_.name)
   }
 
-  def gradeCourses(std: Student): collection.Seq[Course] = {
-    courseGradeProvider.getPublished(std).map(_.course).distinct
+  def gradeScores(std: Student): collection.Map[Course, String] = {
+    val scores = Collections.newMap[Course, String]
+    val grades = courseGradeProvider.getPublished(std)
+    grades foreach { g =>
+      if (g.passed) {
+        scores.put(g.course, g.scoreText.getOrElse("--"))
+      }
+    }
+    scores
   }
 
   def doApply(): View = {

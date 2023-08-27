@@ -221,7 +221,7 @@
         <tr>
             [@drawAllAncestor courseGroup /]
             <td class="credit_hour">${courseGroup.credits}</td>
-            <td class="credit_hour">${courseGroup.creditHours!}</td>
+            [#if displayCreditHour]<td class="credit_hour">${courseGroup.creditHours}</td>[/#if]
             [@groupTermInfoMacro courseGroup /]
             <td class="credit_hour">&nbsp;${courseGroup.remark!}</td>
         </tr>
@@ -244,7 +244,7 @@
             <td class="course">&nbsp;${planCourse.course.code!}</td>
             <td class="course">&nbsp;${courseCount}&nbsp;[@displayCourse courseGroup.plan,planCourse.course/]</td>
             <td class="credit_hour">${planCourse.course.getCredits(courseGroup.plan.program.level)!}</td>
-            <td class="credit_hour">${planCourse.course.creditHours}</td>
+            [#if displayCreditHour]<td class="credit_hour">${(planCourse.course.creditHours)?default(0)}</td>[/#if]
             [@courseTermInfoMacro planCourse /]
             <td class="credit_hour">[#if planCourse.compulsory && !courseGroup.autoAddup]必修 [/#if][#if planCourse.remark?exists]${planCourse.remark!}[#else]&nbsp;[/#if]</td>
         </tr>
@@ -257,7 +257,7 @@
                 [#if courseGroup.autoAddup]学分小计[#else]<font color="#1F3D83">应修学分</font>[/#if]
             </td>
             <td class="credit_hour summary">[#if courseGroup.autoAddup]${courseGroup.credits}[#else]<font color="#1F3D83">${courseGroup.credits}</font>[/#if]</td>
-            <td class="credit_hour summary">${courseGroup.creditHours}</td>
+            [#if displayCreditHour]<td class="credit_hour summary">${courseGroup.creditHours}</td>[/#if]
             [@groupTermInfoMacro courseGroup /]
             <td class="credit_hour">&nbsp;${courseGroup.remark!}</td>
         </tr>

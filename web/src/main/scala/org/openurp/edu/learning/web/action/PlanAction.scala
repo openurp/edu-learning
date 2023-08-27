@@ -60,6 +60,7 @@ class PlanAction extends StudentSupport {
         put("hasProgramDoc", docs.nonEmpty)
     }
     put("ems_base", Ems.base)
+    put("displayCreditHour", getProjectProperty("edu.program.display_credit_hour", true))
     put("enableLinkCourseInfo", getProjectProperty(Features.ProgramLinkCourseEnabled, false))
     forward()
   }
