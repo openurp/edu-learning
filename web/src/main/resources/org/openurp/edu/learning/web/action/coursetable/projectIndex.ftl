@@ -1,7 +1,7 @@
 [#ftl]
 [@b.head/]
 <div class="container-fluid">
-<script language="JavaScript" type="text/JavaScript" src="${b.base}/static/edu/TaskActivity.js?v=20210313"></script>
+<script language="JavaScript" type="text/JavaScript" src="${b.base}/static/edu/TaskActivity.js?v=20231018"></script>
 [@b.toolbar title="我的课表"/]
 [@base.semester_bar value=semester! formName='courseTableForm']
   <label class="title">课表类型:</label>
@@ -22,7 +22,6 @@
  [#include "courseTableStyle.ftl"/]
  [@initCourseTable table,1/]
  [#if setting.displayClazz]
-   <br>
    [#assign taskList=table.clazzes]
    [#if table.category=="squad"][#include "squadTaskList.ftl"/][#else][#include "stdTaskList.ftl"/][/#if]
  [/#if]

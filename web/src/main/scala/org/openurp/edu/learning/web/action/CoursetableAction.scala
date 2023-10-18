@@ -29,7 +29,7 @@ import org.beangle.web.action.view.View
 import org.beangle.webmvc.support.helper.PopulateHelper
 import org.openurp.base.edu.model.*
 import org.openurp.base.edu.service.TimeSettingService
-import org.openurp.base.model.Semester
+import org.openurp.base.model.{Project, Semester}
 import org.openurp.base.service.{ProjectPropertyService, SemesterService}
 import org.openurp.base.std.model.{Squad, Student}
 import org.openurp.edu.Features
@@ -64,10 +64,16 @@ class CoursetableAction extends StudentSupport {
       case "std" => std
       case "squad" => std.state.get.squad.get
     }
+
+    given project: Project = std.project
+
     val courseTable = buildCourseTable(resource, setting, timeSetting, ss)
+    if (getProjectProperty("edu.clazz.tablestyle", CourseTable.Style.UNIT_COLUMN.toString) == "UNIT_COLUMN") {
+      courseTable.style = CourseTable.Style.UNIT_COLUMN
+    }
     put("table", courseTable)
     put("setting", setting)
-    put("student",std)
+    put("student", std)
     put("ems", Ems)
     forward()
   }
