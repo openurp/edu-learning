@@ -7,7 +7,7 @@
   [#assign width=16]
 [/#if]
 
-[@b.grid items=grades var="grade" filterable="false"]
+[@b.grid items=grades var="grade" filterable="false" class="border-1px border-blue"]
   [@b.row]
     [@b.col title="序号" width="5%"]${grade_index+1}[/@]
     [@b.col title="学年学期" width="8%"]${grade.semester.schoolYear} ${grade.semester.name}[/@]
