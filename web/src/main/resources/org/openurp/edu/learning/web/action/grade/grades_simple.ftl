@@ -1,7 +1,7 @@
 [#ftl]
 [#include "std_info.ftl"/]
 [#assign semesterNames={'1':'第一学期','2':'第二学期'}]
-[@b.grid items=grades var="grade" filterable="false" style="border:0.5px solid #006CB2"]
+[@b.grid items=grades var="grade" filterable="false"]
   [@b.row]
     [@b.col width="4%" title="序号"]${grade_index+1}[/@]
     [@b.col width="180px" title="学年学期"]${grade.semester.schoolYear}学年 ${semesterNames[grade.semester.name]!grade.semester.name}[/@]

@@ -6,8 +6,8 @@
   <h6 style="margin-bottom:2px;margin-top:2px;text-align:center">
   各学期成绩统计<span style="font-size:0.8rem;color: #999;">统计时间:${stdGpa.updatedAt?string("yyyy-MM-dd HH:mm")}</span>
   </h6>
-  <table class="gridtable" style="width:100%;border:0.5px solid #006CB2">
-    <thead class="gridhead">
+  <table class="grid-table" style="width:100%;">
+    <thead class="grid-head">
       <tr>
         <th>学年学期</th>
         <th>课程门数</th>
@@ -17,14 +17,14 @@
       </tr>
     </thead>
     <tbody>
-        [#assign trClass="griddata-even"/]
+        [#assign trClass="grid-data-even"/]
         [#assign isDouble=false/]
         [#list stdGpa.semesterGpas?sort_by(["semester","code"]) as stdSemesterGpa]
             [#if isDouble]
-              [#assign trClass="griddata-odd"/]
+              [#assign trClass="grid-data-odd"/]
               [#assign isDouble=false/]
             [#else]
-              [#assign trClass="griddata-even"/]
+              [#assign trClass="grid-data-even"/]
               [#assign isDouble=true/]
             [/#if]
             <tr class="${trClass}">
@@ -36,10 +36,10 @@
             </tr>
           [/#list]
           [#if isDouble]
-            [#assign trClass="griddata-odd"/]
+            [#assign trClass="grid-data-odd"/]
             [#assign isDouble=false/]
           [#else]
-            [#assign trClass="griddata-even"/]
+            [#assign trClass="grid-data-even"/]
             [#assign isDouble=true/]
           [/#if]
           <tr class="${trClass}">
@@ -50,10 +50,10 @@
               <td>${stdGpa.gpa!}</td>
           </tr>
       [#if isDouble]
-        [#assign trClass="griddata-odd"/]
+        [#assign trClass="grid-data-odd"/]
         [#assign isDouble=false/]
       [#else]
-        [#assign trClass="griddata-even"/]
+        [#assign trClass="grid-data-even"/]
         [#assign isDouble=true/]
       [/#if]
     </tbody>

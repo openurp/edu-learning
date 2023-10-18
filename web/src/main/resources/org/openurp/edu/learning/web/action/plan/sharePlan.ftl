@@ -35,9 +35,9 @@
         </button>
       </div>
     </div>
-    <div class="gridcontent" style="border:0.5px solid #006CB2">
-      <table class="gridtable" id="share_plan_table">
-        <thead class="gridhead">
+    <div class="grid-content">
+      <table class="grid-table" id="share_plan_table">
+        <thead class="grid-head">
           <tr>
             <td width="10%">课程代码</td>
             <td>课程名称</td>

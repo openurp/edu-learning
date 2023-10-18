@@ -1,7 +1,7 @@
 [#ftl/]
-<div class="grid" style="border:0.5px solid #006CB2">
-<table width="100%" class="gridtable">
-  <thead class="gridhead">
+<div class="grid">
+<table width="100%" class="grid-table">
+  <thead class="grid-head">
     <tr>
       <th width="5%">课程</th>
       <th width="10%">代码</th>

@@ -1,5 +1,5 @@
 [#ftl]
-[@b.grid items=taskList?sort_by(["course","code"]) var="clazz" sortable="false" style="border:0.5px solid #006CB2"]
+[@b.grid items=taskList?sort_by(["course","code"]) var="clazz" sortable="false" class="border-1px border-blue"]
   [@b.row]
     [@b.col width="5%" title="序号"]${clazz_index+1}[/@]
     [@b.col width="8%"  property="crn" title="课程序号"]${(clazz.crn)!}[/@]

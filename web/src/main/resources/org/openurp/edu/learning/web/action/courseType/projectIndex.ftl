@@ -9,7 +9,7 @@
     }
   [/@]
 
-  [@b.grid sortable="true" items=applies var="apply"  style="border:0.5px solid #006CB2"]
+  [@b.grid sortable="true" items=applies var="apply" class="border-1px border-blue"]
     [@b.row]
       [@b.col width='20%' title="课程代码、名称、学分"]
           ${apply.course.code} ${apply.course.name} (${apply.course.getCredits(student.level)})

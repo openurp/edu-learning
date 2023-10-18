@@ -7,25 +7,25 @@
 叶子最深处于第几层：${teachPlanLeafLevels}
 --]
 <div class="container-fluid" style="width:95%">
-    <table id="planInfoTable${plan.id}" name="planInfoTable${plan.id}" class="planTable"  style="font-size:12px;vnd.ms-excel.numberformat:@" width="100%">
+    <table id="planInfoTable${plan.id}" name="planInfoTable${plan.id}" class="grid-table planTable"  style="font-size:12px;vnd.ms-excel.numberformat:@" width="100%">
         [#assign maxTerm=plan.terms /]
         [#assign courseTypeWidth=5*maxFenleiSpan/]
         [#if courseTypeWidth>15][#assign courseTypeWidth=15/][/#if]
-        <thead>
+        <thead class="grid-head">
             <tr align="center">
-                <td rowspan="2" colspan="${maxFenleiSpan}" width="${courseTypeWidth}%">分类</td>
-                <td rowspan="2" width="10%">课程代码</td>
-                <td rowspan="2">课程名称</td>
-                <td rowspan="2" width="5%">学分</td>
-                [#if displayCreditHour]<td rowspan="2" width="5%">学时</td>[/#if]
-                <td colspan="${maxTerm}" width="${maxTerm*3.5}%">各学期学分分布</td>
-                <td rowspan="2" width="10%">备注</td>
+                <th rowspan="2" colspan="${maxFenleiSpan}" width="${courseTypeWidth}%">分类</th>
+                <th rowspan="2" width="10%">课程代码</th>
+                <th rowspan="2">课程名称</th>
+                <th rowspan="2" width="5%">学分</th>
+                [#if displayCreditHour]<th rowspan="2" width="5%">学时</th>[/#if]
+                <th colspan="${maxTerm}" width="${maxTerm*3.5}%">各学期学分分布</th>
+                <th rowspan="2" width="10%">备注</th>
             </tr>
             <tr>
             [#assign total_term_credit={} /]
             [#list plan.startTerm..plan.endTerm as i ]
                 [#assign total_term_credit=total_term_credit + {i:0} /]
-                <td width="[#if maxTerm?exists&&maxTerm!=0]${25/maxTerm}[#else]2[/#if]%" style="text-align: center;">${i}</td>
+                <th width="[#if maxTerm?exists&&maxTerm!=0]${25/maxTerm}[#else]2[/#if]%" style="text-align: center;">${i}</th>
             [/#list]
             </tr>
         </thead>
@@ -51,7 +51,7 @@
                 [#assign remarkSpan = 3 + 1 +maxTerm/]
                 [#if displayCreditHour][#assign remarkSpan =1+remarkSpan/][/#if]
                   [#assign remark = plan.program.remark?replace("\r","")/]
-                <td style="padding-left: 10px;line-height: 1.5rem;" colspan="${remarkSpan}">${remark?replace('\n','<br>')}</td>
+                <td class="remark" style="padding-left: 10px;line-height: 1.5rem;" colspan="${remarkSpan}">${remark?replace('\n','<br>')}</td>
             </tr>
             [/#if]
         </tbody>

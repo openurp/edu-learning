@@ -1,7 +1,7 @@
 [#ftl]
 [@b.head/]
 [@b.messages /]
-<link rel="stylesheet" type="text/css" href="${b.base}/static/css/plan.css?v=20220811" />
+<link rel="stylesheet" type="text/css" href="${b.base}/static/css/plan.css?v=20230813" />
 [#if plan??]
 [#include "planFunctions.ftl" /]
 [#assign maxTerm = plan.terms /]
@@ -19,7 +19,7 @@
         <div style="text-align:center;font-size:12px;vnd.ms-excel.numberformat:@;width:90%;margin:auto" >
         [#if stdAlternativeCourses?? && stdAlternativeCourses?size > 0]
           <h5>个人替代课程</h5>
-          [@b.grid sortable="false" items=stdAlternativeCourses var="stdAlternativeCourse" style="border:0.5px solid #006CB2"]
+          [@b.grid sortable="false" items=stdAlternativeCourses var="stdAlternativeCourse" class="border-1px border-blue"]
               [@b.row]
                   [@b.col width="10%" title="序号"]${stdAlternativeCourse_index+1}[/@]
                   [@b.col width='45%' title="原课程代码、名称、学分"]
@@ -37,7 +37,7 @@
         <div style="text-align:center;font-size:12px;vnd.ms-excel.numberformat:@;width:90%;margin:auto">
         [#if majorAlternativeCourses?? && majorAlternativeCourses?size > 0]
           <h5>专业替代课程</h5>
-          [@b.grid sortable="false" items=majorAlternativeCourses var="majorAlternativeCourse" style="border:0.5px solid #006CB2"]
+          [@b.grid sortable="false" items=majorAlternativeCourses var="majorAlternativeCourse" class="border-1px border-blue"]
             [@b.row]
               [@b.col width="10%" title="序号"]${majorAlternativeCourse_index+1}[/@]
               [@b.col width='45%' title="原课程代码、名称、学分"]
