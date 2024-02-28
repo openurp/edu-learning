@@ -28,7 +28,7 @@ class DefaultModule extends BindModule {
     bind(classOf[ClazzAction])
     bind(classOf[CoursetableAction])
     bind(classOf[CourseTypeAction])
-    bind(classOf[ExamtableAction])
+    bind(classOf[ExamAction])
     bind(classOf[GradeAction])
     bind(classOf[NoticeAction])
     bind(classOf[PlanAction])

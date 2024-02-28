@@ -9,7 +9,7 @@
       <th>学分</th>
       <th>完成学分</th>
       <th>成绩</th>
-      <th>通过否</th>
+      <th>完成否</th>
       <th width="20%">备注</th>
     </tr>
   </thead>

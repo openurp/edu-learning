@@ -17,31 +17,19 @@
 
 package org.openurp.edu.learning.web.action
 
-import org.beangle.commons.bean.Properties
-import org.beangle.commons.collection.Order
-import org.beangle.commons.lang.time.{WeekDay, WeekTime}
-import org.beangle.commons.lang.{Numbers, Strings}
-import org.beangle.data.dao.{EntityDao, OqlBuilder}
-import org.beangle.data.model.Entity
+import org.beangle.data.dao.OqlBuilder
 import org.beangle.ems.app.Ems
-import org.beangle.web.action.context.Params
 import org.beangle.web.action.view.View
-import org.beangle.webmvc.support.helper.PopulateHelper
 import org.openurp.base.edu.model.*
 import org.openurp.base.edu.service.TimeSettingService
-import org.openurp.base.model.{Project, Semester}
-import org.openurp.base.service.{ProjectPropertyService, SemesterService}
+import org.openurp.base.model.Project
 import org.openurp.base.std.model.{Squad, Student}
-import org.openurp.edu.Features
 import org.openurp.edu.clazz.config.ScheduleSetting
 import org.openurp.edu.clazz.domain.{ClazzProvider, WeekTimeBuilder}
-import org.openurp.edu.clazz.model.CourseTaker
 import org.openurp.edu.learning.web.helper.CourseTableSetting
 import org.openurp.edu.schedule.service.CourseTable
+import org.openurp.edu.service.Features
 import org.openurp.starter.web.support.StudentSupport
-
-import java.time.LocalDate
-import scala.collection.mutable
 
 class CoursetableAction extends StudentSupport {
 
@@ -68,7 +56,7 @@ class CoursetableAction extends StudentSupport {
     given project: Project = std.project
 
     val courseTable = buildCourseTable(resource, setting, timeSetting, ss)
-    if (getProjectProperty("edu.clazz.tablestyle", CourseTable.Style.UNIT_COLUMN.toString) == "UNIT_COLUMN") {
+    if (getConfig(Features.Clazz.TableStyle) == "UNIT_COLUMN") {
       courseTable.style = CourseTable.Style.UNIT_COLUMN
     }
     put("table", courseTable)

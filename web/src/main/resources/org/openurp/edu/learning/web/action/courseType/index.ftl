@@ -1,6 +1,7 @@
 [#ftl]
 [@b.head /]
 <div class="container-fluid">
+  [#include "../project.ftl" /]
   [#include "../alternative/nav.ftl"/]
   [@b.toolbar title="个人成绩课程类别变更申请"]
     bar.addItem("申请","apply()","action-new");
@@ -9,7 +10,7 @@
     }
   [/@]
 
-  [@b.grid sortable="true" items=applies var="apply" class="border-1px border-blue"]
+  [@b.grid sortable="true" items=applies var="apply" class="border-1px border-colored"]
     [@b.row]
       [@b.col width='20%' title="课程代码、名称、学分"]
           ${apply.course.code} ${apply.course.name} (${apply.course.getCredits(student.level)})

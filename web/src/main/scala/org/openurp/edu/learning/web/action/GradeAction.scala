@@ -19,14 +19,10 @@ package org.openurp.edu.learning.web.action
 
 import org.beangle.commons.bean.orderings.MultiPropertyOrdering
 import org.beangle.commons.collection.Collections
-import org.beangle.data.dao.{EntityDao, OqlBuilder}
-import org.beangle.web.action.support.ActionSupport
 import org.beangle.web.action.view.View
-import org.openurp.base.model.Semester
-import org.openurp.base.service.SemesterService
+import org.openurp.base.model.{Project, Semester}
 import org.openurp.base.std.model.Student
 import org.openurp.code.edu.model.GradeType
-import org.openurp.code.service.CodeService
 import org.openurp.edu.grade.domain.CourseGradeProvider
 import org.openurp.edu.grade.model.{CourseGrade, StdGpa}
 import org.openurp.starter.web.support.StudentSupport
@@ -52,6 +48,10 @@ class GradeAction extends StudentSupport {
       val sgs = semesterGrades.getOrElseUpdate(cg.semester, Collections.newBuffer[CourseGrade])
       sgs.addOne(cg)
     }
+
+    given project: Project = std.project
+
+    put("style", getConfig("edu.grade.std_page_style", "normal"))
     put("semesterGrades", semesterGrades)
     put("grades", grades.sorted(new MultiPropertyOrdering("semester.code desc,course.code")))
     put("gradeTypes", publishedGradeTypes)

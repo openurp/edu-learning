@@ -19,7 +19,7 @@
           <tr>
             <td>${lesson.idx}</td>
             <td>${lesson.openOn?string("MM-dd")}</td>
-            <td>${lesson.contents}</td>
+            <td>${(lesson.contents!"")?replace("\n","<br>")}</td>
             <td>${lesson.places!}</td>
           </tr>
         [/#list]

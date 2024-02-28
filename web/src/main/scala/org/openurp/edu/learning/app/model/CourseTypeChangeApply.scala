@@ -19,7 +19,7 @@ package org.openurp.edu.learning.app.model
 
 import org.beangle.data.model.LongId
 import org.beangle.data.model.pojo.{Remark, Updated}
-import org.openurp.base.edu.code.CourseType
+import org.openurp.code.edu.model.CourseType
 import org.openurp.base.edu.model.Course
 import org.openurp.base.model.User
 import org.openurp.base.std.model.Student

@@ -4,7 +4,7 @@
 <table id="stat_grade" style="width:100%;">
 <tr><td style="vertical-align:top">
   <h6 style="margin-bottom:2px;margin-top:2px;text-align:center">
-  各学期成绩统计<span style="font-size:0.8rem;color: #999;">统计时间:${stdGpa.updatedAt?string("yyyy-MM-dd HH:mm")}</span>
+  各学期成绩统计<span style="font-size:0.8rem;color: #999;float: right;">统计时间:${stdGpa.updatedAt?string("yyyy-MM-dd HH:mm")}</span>
   </h6>
   <table class="grid-table" style="width:100%;">
     <thead class="grid-head">
@@ -16,7 +16,7 @@
         <th>平均绩点</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody class="grid-body">
         [#assign trClass="grid-data-even"/]
         [#assign isDouble=false/]
         [#list stdGpa.semesterGpas?sort_by(["semester","code"]) as stdSemesterGpa]

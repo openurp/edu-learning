@@ -20,6 +20,7 @@ package org.openurp.edu.learning.web.action
 import org.beangle.commons.collection.Collections
 import org.beangle.commons.lang.Strings
 import org.beangle.data.dao.OqlBuilder
+import org.beangle.ems.app.web.WebBusinessLogger
 import org.beangle.security.Securities
 import org.beangle.web.action.view.View
 import org.beangle.webmvc.support.action.EntityAction
@@ -30,6 +31,7 @@ import org.openurp.edu.grade.domain.CourseGradeProvider
 import org.openurp.edu.learning.app.model.AlternativeApply
 import org.openurp.edu.program.domain.{AlternativeCourseProvider, CoursePlanProvider}
 import org.openurp.edu.program.model.{SharePlan, StdAlternativeCourse}
+import org.openurp.edu.service.Features
 import org.openurp.starter.web.support.StudentSupport
 
 import java.time.Instant
@@ -42,6 +44,8 @@ class AlternativeAction extends StudentSupport with EntityAction[AlternativeAppl
   var alternativeCourseProvider: AlternativeCourseProvider = _
 
   var courseGradeProvider: CourseGradeProvider = _
+
+  var businessLogger: WebBusinessLogger = _
 
   protected override def projectIndex(std: Student): View = {
     val builder = OqlBuilder.from(classOf[AlternativeApply], "apply")
@@ -64,7 +68,7 @@ class AlternativeAction extends StudentSupport with EntityAction[AlternativeAppl
     put("planCourses", pcourses)
     put("gradeCourses", scores.keySet)
     put("scores", scores)
-    put("multiple_enabled", getProjectProperty("edu.program.alternative_apply_multiple_enabled", true))
+    put("multiple_enabled", getConfig(Features.Program.AlternativeApplyMultipleEnabled))
     forward()
   }
 

@@ -17,10 +17,8 @@
 
 package org.openurp.edu.learning.web.action
 
-import org.beangle.data.dao.EntityDao
 import org.beangle.ems.app.Ems
 import org.beangle.web.action.view.View
-import org.openurp.base.service.SemesterService
 import org.openurp.base.std.model.Student
 import org.openurp.starter.web.support.StudentSupport
 
@@ -29,11 +27,7 @@ import org.openurp.starter.web.support.StudentSupport
  */
 class ChooseAction extends StudentSupport {
 
-  override def index(): View = {
-    redirect(to(Ems.webapp + "/edu/clazz/student/stdElectCourse.action"), "")
-  }
-
   protected override def projectIndex(student: Student): View = {
-    forward()
+    redirect(to(Ems.webapp + "/edu/clazz/student/stdElectCourse.action"), "")
   }
 }

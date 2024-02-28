@@ -27,9 +27,9 @@ import org.beangle.web.action.view.View
 import org.openurp.base.model.{AuditStatus, Project}
 import org.openurp.base.std.model.Student
 import org.openurp.code.edu.model.TeachingNature
-import org.openurp.edu.Features
 import org.openurp.edu.program.domain.{AlternativeCourseProvider, CoursePlanProvider}
 import org.openurp.edu.program.model.{Program, ProgramDoc, SharePlan}
+import org.openurp.edu.service.Features
 import org.openurp.starter.web.support.StudentSupport
 
 class PlanAction extends StudentSupport {
@@ -46,7 +46,7 @@ class PlanAction extends StudentSupport {
       val stdAlternativeCourses = alternativeCourseProvider.getStdAlternatives(std)
       put("plan", plan)
       put("teachingNatures", codeService.get(classOf[TeachingNature])) //展示多类课时
-      if (getProjectProperty("edu.program.major_alternative.show2std", true)) {
+      if (getConfig(Features.Program.MajorAlternativeShow2Std).asInstanceOf[Boolean]) {
         put("majorAlternativeCourses", majorAlternativeCourses)
       }
       put("stdAlternativeCourses", stdAlternativeCourses)
@@ -60,8 +60,8 @@ class PlanAction extends StudentSupport {
         put("hasProgramDoc", docs.nonEmpty)
     }
     put("ems_base", Ems.base)
-    put("displayCreditHour", getProjectProperty("edu.program.display_credit_hour", true))
-    put("enableLinkCourseInfo", getProjectProperty(Features.ProgramLinkCourseEnabled, false))
+    put("displayCreditHour", getConfig(Features.Program.DisplayCreditHour))
+    put("enableLinkCourseInfo", getConfig(Features.Program.LinkCourseEnabled))
     forward()
   }
 

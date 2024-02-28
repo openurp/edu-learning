@@ -1,13 +1,14 @@
 [#ftl]
 [@b.head /]
 <div class="container-fluid">
+  [#include "../project.ftl" /]
   [#include "nav.ftl"/]
   [@b.toolbar title="个人替代课程课程申请"]
     bar.addItem("申请","apply()",'action-new');
     function apply(){bg.form.submit(document.applyForm); }
   [/@]
 
-  [@b.grid sortable="true" items=applies var="apply" class="border-1px border-blue"]
+  [@b.grid sortable="true" items=applies var="apply" class="border-1px border-colored"]
     [@b.row]
       [@b.col width='25%' title="原课程代码、名称、学分"]
         [#list apply.olds as course] ${course.code} ${course.name} (${course.getCredits(student.level)}) [#sep]<br>[/#list]
