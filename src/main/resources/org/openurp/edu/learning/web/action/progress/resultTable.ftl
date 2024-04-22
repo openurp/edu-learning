@@ -4,29 +4,39 @@
   <thead class="grid-head">
     <tr>
       <th width="5%">课程</th>
-      <th width="10%">代码</th>
-      <th width="30%">名称</th>
-      <th>学分</th>
+      <th width="12%">代码</th>
+      <th width="35%">名称</th>
+      <th>要求学分</th>
       <th>完成学分</th>
       <th>成绩</th>
       <th>完成否</th>
       <th width="20%">备注</th>
     </tr>
   </thead>
-  [@groupsData planAuditResult.topGroupResults?sort_by('indexno'),1/]
+  [@groupsData auditPlanResult.topGroupResults?sort_by('indexno'),1/]
 </table>
 </div>
 <br><br>
 [#macro groupsData courseGroups,lastNum]
   [#list courseGroups as group]
     <tr class="darkColumn" style="font-weight: bold">
-      <td colspan="3" style="padding-left: 5px;text-align: left;">[#list 1..lastNum as d][/#list]${sg.next(lastNum?int)}&nbsp;${(group.name)?if_exists}[#if (group.children?size>0)]<span style="font-weight: normal">[#if (group.groupRelation.relation)?default('and')!='and'](所有子项至少一项满足要求)[/#if]</span>[/#if]</td>
-      <td align="center">${(group.auditStat.requiredCredits)?default('')}</td>
-      <td align="center">${(group.auditStat.passedCredits)?default('')} [#if ((group.auditStat.convertedCredits)>0)](转换${(group.auditStat.convertedCredits)}学分)[/#if]</td>
+      <td colspan="3" style="padding-left: 5px;text-align: left;">
+        [#list 1..lastNum as d][/#list]${sg.next(lastNum?int)}&nbsp;${(group.name)?if_exists}
+        [#if group.parent?? && !group.passed]
+        <span style="color:#f1948a;font-weight: normal;">
+        [#assign displayed=false/]
+        [#if group.owedCredits>0](缺${group.owedCredits}分)[#assign displayed=true/][/#if]
+        [#if group.neededGroups>0](要求${group.subCount}组 缺${group.neededGroups}组)[#assign displayed=true/][/#if]
+        [#if !displayed]必修课未完成[/#if]
+        </span>
+        [/#if]
+      </td>
+      <td align="center">${(group.requiredCredits)?default('')}</td>
+      <td align="center">${(group.passedCredits)?default('')} [#if ((group.convertedCredits)>0)](转换${(group.convertedCredits)}学分)[/#if]</td>
       <td></td>
       <td align="center">
-        [#if group.passed]是[#else]<font color='red'>[#if (group.auditStat.requiredCredits > group.auditStat.passedCredits+group.auditStat.convertedCredits)]缺${(group.auditStat.requiredCredits)-(group.auditStat.passedCredits)-(group.auditStat.convertedCredits)}分[#else]否[/#if]</font>
-        [#if (group.auditStat.requiredCount > group.auditStat.passedCount)]<font color='red'>缺${(group.auditStat.requiredCount)-(group.auditStat.passedCount)}门</font>[/#if]
+        [#if group.passed]<span [#if group.parent??]style="font-weight: normal;"[/#if]>是</span>[#elseif !group.parent??]
+          <span style="color:red;">缺${group.owedCredits}分</span>
         [/#if]
       </td>
       <td align="center">&nbsp;</td>
@@ -42,7 +52,7 @@
          <td align="center">${courseResult.scores!}</td>
          <td align="center">
            [#if courseResult.scores!='--' && !courseResult.passed]${courseResult.passed?string("是","<font color='red'>否</font>")}[/#if]</td>
-         <td align="center">${courseResult.remark?if_exists}</td>
+         <td align="center"><div title="${courseResult.remark?if_exists}">${courseResult.remark?if_exists}</div></td>
      </tr>
      [/#list]
       [#if (group.children?size!=0)]

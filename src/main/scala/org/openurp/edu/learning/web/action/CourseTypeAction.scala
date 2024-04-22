@@ -26,8 +26,8 @@ import org.openurp.code.edu.model.CourseType
 import org.openurp.base.edu.model.Course
 import org.openurp.base.std.model.Student
 import org.openurp.edu.grade.model.CourseGrade
-import org.openurp.edu.learning.app.model.CourseTypeChangeApply
 import org.openurp.edu.program.domain.CoursePlanProvider
+import org.openurp.edu.program.flow.CourseTypeChangeApply
 import org.openurp.edu.program.model.{CourseGroup, CoursePlan}
 import org.openurp.starter.web.support.StudentSupport
 

@@ -1,13 +1,16 @@
 [#ftl/]
 [@b.head/]
 [#include "../project.ftl" /]
-<link id="jquery_theme_link" rel="stylesheet" href="${b.base}/static/css/mobile.css?rn=5" type="text/css"/>
-<div class="container-fluid pc_content">
+<div class="container">
   [@b.toolbar title="计划完成情况"]
     bar.addPrint();
   [/@]
+  [#if enableConfirm!false]
+    [#include "confirm.ftl" /]
+  [/#if]
+
   [#assign std=student/]
-  [#if planAuditResult??]
+  [#if auditPlanResult??]
   <table align="center" class="infoTable">
    <tr>
     <td class="title" width="15%">学号:</td>
@@ -29,9 +32,9 @@
     <td class="title">专业/方向:</td>
     <td class="content">${std.state.major.name}&nbsp;${(std.state.direction.name)!}</td>
     <td class="title">要求学分/实修学分:</td>
-    <td class="content">${planAuditResult.auditStat.requiredCredits}&nbsp;/&nbsp;${planAuditResult.auditStat.passedCredits}</td>
+    <td class="content">${auditPlanResult.requiredCredits}&nbsp;/&nbsp;${auditPlanResult.passedCredits}</td>
     <td class="title">更新时间:</td>
-    <td class="content">${(planAuditResult.updatedAt?string('yyyy-MM-dd HH:mm:ss'))!}
+    <td class="content">${(auditPlanResult.updatedAt?string('yyyy-MM-dd HH:mm:ss'))!}
    </tr>
   </table>
   [#include "resultTable.ftl" /]
@@ -39,5 +42,4 @@
     尚无您的计划完成情况。
   [/#if]
 </div>
-[#include "mobileIndex.ftl"/]
 [@b.foot/]

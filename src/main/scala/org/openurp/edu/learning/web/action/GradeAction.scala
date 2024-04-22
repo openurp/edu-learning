@@ -17,7 +17,7 @@
 
 package org.openurp.edu.learning.web.action
 
-import org.beangle.commons.bean.orderings.MultiPropertyOrdering
+import org.beangle.commons.bean.orderings.PropertyOrdering
 import org.beangle.commons.collection.Collections
 import org.beangle.web.action.view.View
 import org.openurp.base.model.{Project, Semester}
@@ -53,7 +53,7 @@ class GradeAction extends StudentSupport {
 
     put("style", getConfig("edu.grade.std_page_style", "normal"))
     put("semesterGrades", semesterGrades)
-    put("grades", grades.sorted(new MultiPropertyOrdering("semester.code desc,course.code")))
+    put("grades", grades.sorted(PropertyOrdering.by("semester.code desc,course.code")))
     put("gradeTypes", publishedGradeTypes)
     put("std", std)
     forward()

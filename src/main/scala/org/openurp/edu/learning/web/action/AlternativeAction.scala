@@ -28,8 +28,8 @@ import org.openurp.base.edu.model.Course
 import org.openurp.base.model.Project
 import org.openurp.base.std.model.Student
 import org.openurp.edu.grade.domain.CourseGradeProvider
-import org.openurp.edu.learning.app.model.AlternativeApply
 import org.openurp.edu.program.domain.{AlternativeCourseProvider, CoursePlanProvider}
+import org.openurp.edu.program.flow.CourseAlternativeApply
 import org.openurp.edu.program.model.{SharePlan, StdAlternativeCourse}
 import org.openurp.edu.service.Features
 import org.openurp.starter.web.support.StudentSupport
@@ -37,7 +37,7 @@ import org.openurp.starter.web.support.StudentSupport
 import java.time.Instant
 import scala.collection.mutable
 
-class AlternativeAction extends StudentSupport with EntityAction[AlternativeApply] {
+class AlternativeAction extends StudentSupport with EntityAction[CourseAlternativeApply] {
 
   var coursePlanProvider: CoursePlanProvider = _
 
@@ -48,7 +48,7 @@ class AlternativeAction extends StudentSupport with EntityAction[AlternativeAppl
   var businessLogger: WebBusinessLogger = _
 
   protected override def projectIndex(std: Student): View = {
-    val builder = OqlBuilder.from(classOf[AlternativeApply], "apply")
+    val builder = OqlBuilder.from(classOf[CourseAlternativeApply], "apply")
       .where("apply.std=:std", std)
     put("applies", entityDao.search(builder))
     forward()
@@ -80,8 +80,9 @@ class AlternativeAction extends StudentSupport with EntityAction[AlternativeAppl
       }
     }
     val spQuery = OqlBuilder.from(classOf[SharePlan], "sp")
-    spQuery.where("sp.project=:project and sp.level=:level", std.project, std.level)
-    spQuery.where(":grade between sp.fromGrade and sp.toGrade", std.state.get.grade)
+    spQuery.where("sp.project=:project", std.project)
+    spQuery.where("sp.level=:level and sp.eduType =:eduType", std.level, std.eduType)
+    spQuery.where(":grade between sp.fromGrade.code and sp.toGrade.code", std.state.get.grade.code)
     entityDao.search(spQuery) foreach { sp =>
       for (cg <- sp.groups; planCourse <- cg.planCourses) {
         courses.add(planCourse.course)
@@ -102,7 +103,7 @@ class AlternativeAction extends StudentSupport with EntityAction[AlternativeAppl
   }
 
   def doApply(): View = {
-    val apply = populateEntity(classOf[AlternativeApply], "apply")
+    val apply = populateEntity(classOf[CourseAlternativeApply], "apply")
     apply.std = getStudent
 
     val project = getProject
@@ -158,7 +159,7 @@ class AlternativeAction extends StudentSupport with EntityAction[AlternativeAppl
    * @param apply 替代申请
    * @return true:原课程和替代课程不一样 false:原课程与替代课程一样
    */
-  private def isDoubleAlternativeCourse(apply: AlternativeApply): Boolean = {
+  private def isDoubleAlternativeCourse(apply: CourseAlternativeApply): Boolean = {
     var bool = false
     val courseOrigins = apply.olds
     val courseSubstitutes = apply.news
@@ -173,7 +174,7 @@ class AlternativeAction extends StudentSupport with EntityAction[AlternativeAppl
 
   def remove(): View = {
     val id = getLongId("apply")
-    val apply = entityDao.get(classOf[AlternativeApply], id)
+    val apply = entityDao.get(classOf[CourseAlternativeApply], id)
     if (apply.approved.contains(true)) return redirect("index", "不能删除已经审核通过的申请")
     val me = Securities.user
     if (!(apply.std.code == me)) return redirect("index", "不能删除别人的申请")
