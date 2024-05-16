@@ -13,7 +13,7 @@
       <td>${pc.course.code}<input type="hidden" value="${groupTitle}" name="groupName"></td>
       <td>
         [#if enableLinkCourseInfo]
-         <a href="${ems_base}/edu/course/info/${pc.course.id}" target="_blank">${pc.course.name}</a>
+         <a href="${ems_base}/edu/course/profile/info/${pc.course.id}" target="_blank">${pc.course.name}</a>
         [#else]
           ${pc.course.name}
         [/#if]

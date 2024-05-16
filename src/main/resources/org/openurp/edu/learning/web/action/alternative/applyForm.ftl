@@ -15,20 +15,23 @@
         计划内课程和替代课程，原则上是一对一选择；如果选择多门则表示多门替代一门。
       [/@]
       [/#if]
+    [#if multiple_enabled]
+      [@b.select label="原课程(计划内)" name="originIds" items=planCourses required='true' empty="..."
+                 option=r"${item.name} (${item.code} ${item.getCredits(student.level)}学分)"
+                 comment="计划中的课程" style="width:500px;" multiple="true" chosenMin="1"]
+      [/@]
+      [@b.select label="替代课程(有成绩)" name="substituteIds" items=gradeCourses?sort_by('name') required='true'
+                 option=r"${item.name} (${item.code} ${item.getCredits(student.level)}学分 成绩${scores.get(item)})"
+                 comment="成绩中的课程" style="width:500px;" multiple="true" chosenMin="1"/]
+    [#else]
       [@b.select label="原课程(计划内)" name="originIds" items=planCourses required='true' empty="..."
                  option=r"${item.name} (${item.code} ${item.getCredits(student.level)}学分)"
                  comment="计划中的课程" style="width:500px;" chosenMin="1"]
        <option value="">...</option>
       [/@]
-
-    [#if multiple_enabled]
       [@b.select label="替代课程(有成绩)" name="substituteIds" items=gradeCourses?sort_by('name') required='true'
                  option=r"${item.name} (${item.code} ${item.getCredits(student.level)}学分 成绩${scores.get(item)})"
-                 comment="成绩中的课程" style="width:500px;" multiple="true" chosenMin="1"/]
-    [#else]
-      [@b.select label="替代课程(有成绩)" name="substituteIds" items=gradeCourses?sort_by('name') required='true' empty="..."
-                 option=r"${item.name} (${item.code} ${item.getCredits(student.level)}学分 成绩${scores.get(item)})"
-                 comment="成绩中的课程" style="width:500px;" chosenMin="1"]
+                 comment="成绩中的课程" style="width:500px;" empty="..." chosenMin="1"]
         <option value="">...</option>
       [/@]
     [/#if]

@@ -27,6 +27,7 @@ import org.openurp.base.std.model.Student
 import org.openurp.edu.clazz.config.ScheduleSetting
 import org.openurp.edu.clazz.domain.ClazzProvider
 import org.openurp.edu.clazz.model.*
+import org.openurp.edu.textbook.model.ClazzMaterial
 
 /** 学生查看单个教学任务
  * 包括课程安排详情、考试详情、通知、课程资料界面
@@ -63,8 +64,8 @@ class ClazzAction extends ActionSupport {
 
   def materials(): View = {
     val clazzId = getLong("clazz.id").getOrElse(0L)
-    val query = OqlBuilder.from(classOf[ClazzMaterial], "material")
-    query.where("material.clazz.id=:clazzId", clazzId)
+    val query = OqlBuilder.from(classOf[ClazzDoc], "doc")
+    query.where("doc.clazz.id=:clazzId", clazzId)
     put("materials", entityDao.search(query))
     forward()
   }
@@ -98,7 +99,7 @@ class ClazzAction extends ActionSupport {
       val path = EmsApp.getBlobRepository(true).url(noticeFile.filePath)
       redirect(to(path.get.toString), "x")
     } else if (materialId > 0) {
-      val material = entityDao.get(classOf[ClazzMaterial], materialId)
+      val material = entityDao.get(classOf[ClazzDoc], materialId)
       material.filePath match {
         case None => Status.NotFound
         case Some(p) =>

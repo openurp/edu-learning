@@ -6,7 +6,7 @@
     [@b.col width="10%" property="course.code" title="课程代码"/]
     [@b.col width="23%" property="course.name" title="课程名称"]
       [#if enableLinkCourseInfo]
-       <a href="${ems.base}/edu/course/info/${clazz.course.id}" target="_blank">${clazz.course.name}</a>
+       <a href="${ems.base}/edu/course/profile/info/${clazz.course.id}" target="_blank">${clazz.course.name}</a>
       [#else]
         ${clazz.course.name}
       [/#if]

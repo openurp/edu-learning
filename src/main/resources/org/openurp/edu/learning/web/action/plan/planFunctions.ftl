@@ -90,7 +90,7 @@
 [#macro displayCourse plan,course]
   [#assign course_remark][#if plan.program.degreeCourses?seq_contains(course)]<span style="color:red" title="学位课程">*</span>[/#if][/#assign]
   [#if enableLinkCourseInfo]
-   <a href="${ems_base}/edu/course/info/${course.id}" target="_blank">${course.name}${course_remark}</a>
+   <a href="${ems_base}/edu/course/profile/info/${course.id}" target="_blank">${course.name}${course_remark}</a>
   [#else]
     ${course.name}${course_remark}
   [/#if]
