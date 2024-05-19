@@ -10,17 +10,13 @@
       <table class="table table-hover table-sm table-striped" style="font-size: 13px;">
         <thead>
           <th width="6%">序号</th>
-          <th width="15%">上课日期</th>
-          <th width="50%">上课内容</th>
-          <th>地点、其他</th>
+          <th width="94%">上课内容</th>
         </thead>
         <tbody>
         [#list plan.lessons?sort_by('idx') as lesson]
           <tr>
             <td>${lesson.idx}</td>
-            <td>${lesson.openOn?string("MM-dd")}</td>
             <td>${(lesson.contents!"")?replace("\n","<br>")}</td>
-            <td>${lesson.places!}</td>
           </tr>
         [/#list]
         </tbody>
