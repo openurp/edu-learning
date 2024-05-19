@@ -24,13 +24,13 @@ import org.beangle.security.Securities
 import org.beangle.web.action.context.Params
 import org.beangle.web.action.view.View
 import org.beangle.webmvc.support.helper.PopulateHelper
-import org.openurp.code.edu.model.ExamDeferReason
 import org.openurp.base.model.Project
 import org.openurp.base.std.model.Student
-import org.openurp.code.edu.model.ExamType
+import org.openurp.code.edu.model.{ExamDeferReason, ExamType}
 import org.openurp.edu.clazz.domain.{ClazzProvider, ExamTakerProvider}
 import org.openurp.edu.clazz.model.CourseTaker
-import org.openurp.edu.exam.model.{ExamDeferApply, ExamNotice, ExamTaker}
+import org.openurp.edu.exam.flow.ExamDeferApply
+import org.openurp.edu.exam.model.{ExamNotice, ExamTaker}
 import org.openurp.edu.service.Features
 import org.openurp.starter.web.support.StudentSupport
 

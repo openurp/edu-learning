@@ -27,6 +27,7 @@ import org.openurp.base.std.model.Student
 import org.openurp.edu.clazz.config.ScheduleSetting
 import org.openurp.edu.clazz.domain.ClazzProvider
 import org.openurp.edu.clazz.model.*
+import org.openurp.edu.course.model.TeachingPlan
 import org.openurp.edu.textbook.model.ClazzMaterial
 
 /** 学生查看单个教学任务
