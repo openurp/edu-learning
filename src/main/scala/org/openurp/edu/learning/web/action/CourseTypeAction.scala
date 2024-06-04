@@ -22,9 +22,9 @@ import org.beangle.data.dao.OqlBuilder
 import org.beangle.security.Securities
 import org.beangle.web.action.view.View
 import org.beangle.webmvc.support.action.EntityAction
-import org.openurp.code.edu.model.CourseType
 import org.openurp.base.edu.model.Course
 import org.openurp.base.std.model.Student
+import org.openurp.code.edu.model.CourseType
 import org.openurp.edu.grade.model.CourseGrade
 import org.openurp.edu.program.domain.CoursePlanProvider
 import org.openurp.edu.program.flow.CourseTypeChangeApply
@@ -51,6 +51,8 @@ class CourseTypeAction extends StudentSupport with EntityAction[CourseTypeChange
       val query = OqlBuilder.from(classOf[CourseGrade], "grade")
       query.where("grade.std = :std", me)
       query.where("grade.passed=true")
+      query.where("grade.project=:project", me.project)
+
       val gradeList = entityDao.search(query)
       val courseGrades = Collections.newMap[Course, CourseGrade]
       gradeList.foreach { g => courseGrades.put(g.course, g) }
@@ -94,8 +96,6 @@ class CourseTypeAction extends StudentSupport with EntityAction[CourseTypeChange
       if g.planCourses.isEmpty then // 1. without courses
         types.add(g.courseType)
       else if !g.autoAddup && g.courseType.optional then // 2. with some courses
-//        val sum = g.planCourses.map(_.course.getCredits(std.level)).sum
-//        if sum < g.credits then
         types.add(g.courseType)
     }
     types

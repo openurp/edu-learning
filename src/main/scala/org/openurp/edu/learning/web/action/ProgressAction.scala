@@ -56,7 +56,7 @@ class ProgressAction extends StudentSupport {
     val graduateResults = entityDao.findBy(classOf[GraduateResult], "std", std)
     val gr = graduateResults.sortBy(_.batch.graduateOn).reverse.headOption
     gr foreach { r =>
-      if (r.batch.enableProgressConfirm) {
+      if (null != r.batch && r.batch.enableProgressConfirm) {
         put("planResultCheck", entityDao.findBy(classOf[PlanResultCheck], "std", std).headOption)
         put("graduateOn", r.batch.graduateOn)
         put("enableConfirm", Math.abs(Weeks.between(r.batch.graduateOn, LocalDate.now)) < 52)
