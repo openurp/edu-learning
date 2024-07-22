@@ -23,7 +23,7 @@
             </tr>
             <tr>
             [#assign total_term_credit={} /]
-            [#list plan.startTerm..plan.endTerm as i ]
+            [#list plan.program.startTerm..plan.program.endTerm as i ]
                 [#assign total_term_credit=total_term_credit + {i:0} /]
                 <th width="[#if maxTerm?exists&&maxTerm!=0]${25/maxTerm}[#else]2[/#if]%" style="text-align: center;">${i}</th>
             [/#list]
@@ -39,7 +39,7 @@
                 <td class="summary" colspan="${maxFenleiSpan + mustSpan}">全程总计</td>
                 <td class="credit_hour summary">${plan.credits!(0)}</td>
                 [#if displayCreditHour]<td class="credit_hour summary">&nbsp;</td>[/#if]
-            [#list plan.startTerm..plan.endTerm as i]
+            [#list plan.program.startTerm..plan.program.endTerm as i]
                 <td class="credit_hour">${total_term_credit[i?string]}</td>
             [/#list]
                 <td>&nbsp;</td>

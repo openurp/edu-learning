@@ -172,7 +172,7 @@
 
 [#-- 计划课程的一格一格的学分信息 --]
 [#macro planCourseCreditInfo planCourse]
-    [#list plan.startTerm..plan.endTerm as i]
+    [#list plan.program.startTerm..plan.program.endTerm as i]
       <td class="credit_hour">
           [#if planCourse.terms.contains(i)]${planCourse.course.getCredits(planCourse.group.plan.program.level)!}[#else]&nbsp;[/#if]
       </td>
@@ -210,7 +210,7 @@
 
 [#-- 计划课程的一格一格的周课时信息 --]
 [#macro planCourseWeekHoursInfo planCourse]
-    [#list plan.startTerm..plan.endTerm as i]
+    [#list plan.program.startTerm..plan.program.endTerm as i]
         <td class="credit_hour">[#if planCourse.terms?exists && (","+planCourse.terms+",")?contains(","+i+",")]${(planCourse.course.weekHours)?if_exists}[#else]&nbsp;[/#if]</td>
     [/#list]
 [/#macro]
