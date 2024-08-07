@@ -27,7 +27,7 @@ import org.openurp.base.std.model.Student
 import org.openurp.edu.clazz.config.ScheduleSetting
 import org.openurp.edu.clazz.domain.ClazzProvider
 import org.openurp.edu.clazz.model.*
-import org.openurp.edu.course.model.TeachingPlan
+import org.openurp.edu.course.model.ClazzPlan
 import org.openurp.edu.textbook.model.ClazzMaterial
 
 /** 学生查看单个教学任务
@@ -81,7 +81,7 @@ class ClazzAction extends ActionSupport {
 
   def teachingPlan(): View = {
     val clazzId = getLong("clazz.id").getOrElse(0L)
-    val query = OqlBuilder.from(classOf[TeachingPlan], "plan")
+    val query = OqlBuilder.from(classOf[ClazzPlan], "plan")
     query.where("plan.clazz.id=:clazzId", clazzId)
     put("plan", entityDao.search(query).headOption)
     forward()
