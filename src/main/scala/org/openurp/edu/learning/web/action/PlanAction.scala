@@ -18,7 +18,7 @@
 package org.openurp.edu.learning.web.action
 
 import org.beangle.commons.collection.Collections
-import org.beangle.commons.lang.Strings
+import org.beangle.commons.lang.{Locales, Strings}
 import org.beangle.commons.text.seq.{HanZiSeqStyle, RomanSeqStyle, SeqPattern}
 import org.beangle.data.dao.OqlBuilder
 import org.beangle.ems.app.Ems
@@ -41,6 +41,8 @@ class PlanAction extends StudentSupport {
   protected override def projectIndex(std: Student): View = {
     given project: Project = std.project
 
+    put("stdAlternativeCourses",List.empty)
+    put("majorAlternativeCourses",List.empty)
     coursePlanProvider.getCoursePlan(std) foreach { plan =>
       val majorAlternativeCourses = alternativeCourseProvider.getMajorAlternatives(std)
       val stdAlternativeCourses = alternativeCourseProvider.getStdAlternatives(std)
@@ -73,7 +75,7 @@ class PlanAction extends StudentSupport {
       builder.where("pd.program =:program", program)
       builder.where("pd.docLocale=:locale", request_locale)
       val seqPattern =
-        if (request_locale == new java.util.Locale("zh", "CN")) new SeqPattern(new HanZiSeqStyle, "{1}")
+        if (request_locale == Locales.chinese) new SeqPattern(new HanZiSeqStyle, "{1}")
         else new SeqPattern(new RomanSeqStyle, "{1}")
       put("seqPattern", seqPattern)
       val docs = entityDao.search(builder)

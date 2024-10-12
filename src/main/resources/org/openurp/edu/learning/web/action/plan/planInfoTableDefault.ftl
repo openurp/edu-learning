@@ -2,10 +2,7 @@
 [#assign maxTerm = plan.terms/]
 [#assign terms = Parameters['terms']?default("")]
 [#include "planFunctions.ftl" /]
-[#--
-课程组的最深层次：${teachPlanLevels}
-叶子最深处于第几层：${teachPlanLeafLevels}
---]
+
 <div class="container-fluid" style="width:95%">
     <table id="planInfoTable${plan.id}" name="planInfoTable${plan.id}" class="grid-table planTable"  style="font-size:12px;vnd.ms-excel.numberformat:@" width="100%">
         [#assign maxTerm=plan.terms /]
@@ -40,7 +37,7 @@
                 <td class="credit_hour summary">${plan.credits!(0)}</td>
                 [#if displayCreditHour]<td class="credit_hour summary">&nbsp;</td>[/#if]
             [#list plan.program.startTerm..plan.program.endTerm as i]
-                <td class="credit_hour">${total_term_credit[i?string]}</td>
+                <td class="credit_hour">&nbsp;</td>
             [/#list]
                 <td>&nbsp;</td>
             </tr>

@@ -1,7 +1,7 @@
 [#ftl]
 [@b.head/]
+[#include "/org/openurp/starter/web/components/multi-std-nav.ftl"/]
 <div class="container-fluid">
-[#include "../project.ftl" /]
 <script language="JavaScript" type="text/JavaScript" src="${b.base}/static/edu/TaskActivity.js?v=20231018"></script>
 [@b.toolbar title="我的课表"/]
 [@base.semester_bar value=semester! formName='courseTableForm']

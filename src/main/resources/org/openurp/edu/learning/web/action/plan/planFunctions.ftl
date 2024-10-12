@@ -172,9 +172,14 @@
 
 [#-- 计划课程的一格一格的学分信息 --]
 [#macro planCourseCreditInfo planCourse]
+    [#local termList = planCourse.terms.termList/]
     [#list plan.program.startTerm..plan.program.endTerm as i]
       <td class="credit_hour">
-          [#if planCourse.terms.contains(i)]${planCourse.course.getCredits(planCourse.group.plan.program.level)!}[#else]&nbsp;[/#if]
+        [#if planCourse.terms.contains(i)]
+          [#if termList?size==1]${planCourse.course.getCredits(planCourse.group.plan.program.level)!}[#else]√[/#if]
+        [#else]
+          &nbsp;
+        [/#if]
       </td>
     [/#list]
 [/#macro]
@@ -243,7 +248,7 @@
 
             <td class="course">&nbsp;${planCourse.course.code!}</td>
             <td class="course">&nbsp;${courseCount}&nbsp;[@displayCourse courseGroup.plan,planCourse.course/]</td>
-            <td class="credit_hour">${planCourse.course.getCredits(courseGroup.plan.program.level)!}</td>
+            <td class="credit_hour">${planCourse.credits}</td>
             [#if displayCreditHour]<td class="credit_hour">${(planCourse.course.creditHours)?default(0)}</td>[/#if]
             [@courseTermInfoMacro planCourse /]
             <td class="credit_hour">[#if planCourse.compulsory && !courseGroup.autoAddup]必修 [/#if][#if planCourse.remark?exists]${planCourse.remark!}[#else]&nbsp;[/#if]</td>

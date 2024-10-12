@@ -1,6 +1,6 @@
 [#ftl]
 [@b.head/]
-[#include "../project.ftl" /]
+[#include "/org/openurp/starter/web/components/multi-std-nav.ftl"/]
 [@b.messages /]
 <link rel="stylesheet" type="text/css" href="${b.base}/static/css/plan.css?v=20230813" />
 [#if plan??]
@@ -8,6 +8,10 @@
 [#assign maxTerm = plan.terms /]
 [#assign terms = Parameters['terms']?default("")]
 <div class="container-fluid">
+  [#if !hasProgramDoc && stdAlternativeCourses?size ==0 && majorAlternativeCourses?size==0 && !sharePlan??]
+    [@planTitle plan/]
+    [#include "planInfoTableDefault.ftl"/]
+  [#else]
     [@b.tabs]
       [@b.tab label="培养计划"]
         [@planTitle plan/]
@@ -58,6 +62,7 @@
           [/@]
         [/#if]
     [/@]
+  [/#if]
 </div>
 [#else]
 <div>尚无您的培养计划</div>

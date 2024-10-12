@@ -1,6 +1,6 @@
 [#ftl/]
 [@b.head/]
-[#include "../project.ftl" /]
+[#include "/org/openurp/starter/web/components/multi-std-nav.ftl"/]
 <div class="container">
   [@b.toolbar title="计划完成情况"]
     bar.addPrint();

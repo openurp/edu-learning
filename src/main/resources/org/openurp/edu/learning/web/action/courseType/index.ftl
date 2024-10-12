@@ -1,7 +1,7 @@
 [#ftl]
 [@b.head /]
+[#include "/org/openurp/starter/web/components/multi-std-nav.ftl"/]
 <div class="container-fluid">
-  [#include "../project.ftl" /]
   [#include "../alternative/nav.ftl"/]
   [@b.toolbar title="个人成绩课程类别变更申请"]
     bar.addItem("申请","apply()","action-new");

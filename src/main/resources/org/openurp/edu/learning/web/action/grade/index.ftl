@@ -1,6 +1,6 @@
 [#ftl]
 [@b.head/]
-[#include "../project.ftl" /]
+[#include "/org/openurp/starter/web/components/multi-std-nav.ftl"/]
 <link id="jquery_theme_link" rel="stylesheet" href="${b.base}/static/css/mobile.css?rn=5" type="text/css"/>
 <div class="container-fluid pc_content">
   [@b.toolbar title="课程成绩"]

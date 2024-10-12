@@ -1,4 +1,4 @@
-[#include "../project.ftl" /]
+[#include "/org/openurp/starter/web/components/multi-std-nav.ftl"/]
 [@b.card class="card-info card-primary card-outline"]
   [#assign title]<i class="fas fa-file-pdf"></i> 课程班级通知[/#assign]
   [@b.card_header class="border-transparent" title=title  minimal="true" closeable="true"]

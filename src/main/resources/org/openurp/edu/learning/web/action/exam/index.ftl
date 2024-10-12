@@ -1,7 +1,7 @@
 [#ftl]
 [@b.head/]
+[#include "/org/openurp/starter/web/components/multi-std-nav.ftl"/]
 <div class="container-fluid">
-[#include "../project.ftl" /]
 [@b.toolbar title="期末考试安排"/]
 [@base.semester_bar value=semester!]
   [#if DeferApplyEnabled]<div style="float:right">[@b.a href="!printApply" target="_blank"]打印缓考申请[/@]</div>[/#if]
