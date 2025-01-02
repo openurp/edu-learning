@@ -25,9 +25,9 @@ import org.beangle.data.dao.EntityDao
 import org.beangle.data.jsonapi.JsonAPI
 import org.beangle.data.jsonapi.JsonAPI.Context
 import org.beangle.security.Securities
-import org.beangle.web.action.annotation.response
-import org.beangle.web.action.context.{ActionContext, Params}
-import org.beangle.web.action.support.ActionSupport
+import org.beangle.webmvc.annotation.response
+import org.beangle.webmvc.context.{ActionContext, Params}
+import org.beangle.webmvc.support.ActionSupport
 import org.openurp.base.edu.model.Course
 import org.openurp.base.model.{Project, Semester}
 import org.openurp.base.std.model.Student

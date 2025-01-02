@@ -17,7 +17,7 @@
 
 package org.openurp.edu.learning.web.ws
 
-import org.beangle.cdi.bind.BindModule
+import org.beangle.commons.cdi.BindModule
 import org.openurp.edu.grade.domain.DefaultCourseGradeProvider
 
 class DefaultModule extends BindModule {

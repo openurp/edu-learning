@@ -22,8 +22,8 @@ import org.beangle.commons.lang.{Locales, Strings}
 import org.beangle.commons.text.seq.{HanZiSeqStyle, RomanSeqStyle, SeqPattern}
 import org.beangle.data.dao.OqlBuilder
 import org.beangle.ems.app.Ems
-import org.beangle.web.action.context.ActionContext
-import org.beangle.web.action.view.View
+import org.beangle.webmvc.context.ActionContext
+import org.beangle.webmvc.view.View
 import org.openurp.base.model.{AuditStatus, Project}
 import org.openurp.base.std.model.Student
 import org.openurp.code.edu.model.TeachingNature

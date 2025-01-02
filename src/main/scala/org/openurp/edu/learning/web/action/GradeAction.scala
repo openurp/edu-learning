@@ -19,7 +19,7 @@ package org.openurp.edu.learning.web.action
 
 import org.beangle.commons.bean.orderings.PropertyOrdering
 import org.beangle.commons.collection.Collections
-import org.beangle.web.action.view.View
+import org.beangle.webmvc.view.View
 import org.openurp.base.model.{Project, Semester}
 import org.openurp.base.std.model.Student
 import org.openurp.code.edu.model.GradeType

@@ -18,7 +18,7 @@
 package org.openurp.edu.learning.web.action
 
 import org.beangle.ems.app.Ems
-import org.beangle.web.action.view.View
+import org.beangle.webmvc.view.View
 import org.openurp.base.std.model.Student
 import org.openurp.starter.web.support.StudentSupport
 

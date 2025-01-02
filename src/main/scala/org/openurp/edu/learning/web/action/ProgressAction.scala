@@ -22,7 +22,7 @@ import org.beangle.commons.text.seq.SeqNumStyle.{ARABIC, HANZI}
 import org.beangle.commons.text.seq.{MultiLevelSeqGenerator, SeqNumStyle, SeqPattern}
 import org.beangle.data.dao.OqlBuilder
 import org.beangle.ems.app.web.WebBusinessLogger
-import org.beangle.web.action.view.View
+import org.beangle.webmvc.view.View
 import org.openurp.base.std.model.Student
 import org.openurp.edu.grade.model.AuditPlanResult
 import org.openurp.starter.web.support.StudentSupport

@@ -19,7 +19,7 @@ package org.openurp.edu.learning.web.action
 
 import org.beangle.data.dao.OqlBuilder
 import org.beangle.ems.app.Ems
-import org.beangle.web.action.view.View
+import org.beangle.webmvc.view.View
 import org.openurp.base.edu.model.*
 import org.openurp.base.edu.service.TimeSettingService
 import org.openurp.base.model.Project

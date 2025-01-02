@@ -21,8 +21,8 @@ import org.beangle.commons.codec.digest.Digests
 import org.beangle.data.dao.{EntityDao, OqlBuilder}
 import org.beangle.ems.app.{Ems, EmsApp}
 import org.beangle.security.Securities
-import org.beangle.web.action.support.ActionSupport
-import org.beangle.web.action.view.{Status, View}
+import org.beangle.webmvc.support.ActionSupport
+import org.beangle.webmvc.view.{Status, View}
 import org.openurp.base.std.model.Student
 import org.openurp.edu.clazz.config.ScheduleSetting
 import org.openurp.edu.clazz.domain.ClazzProvider

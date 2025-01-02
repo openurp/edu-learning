@@ -21,8 +21,8 @@ import org.beangle.commons.collection.Collections
 import org.beangle.data.dao.OqlBuilder
 import org.beangle.ems.app.web.WebBusinessLogger
 import org.beangle.security.Securities
-import org.beangle.web.action.context.Params
-import org.beangle.web.action.view.View
+import org.beangle.webmvc.context.Params
+import org.beangle.webmvc.view.View
 import org.beangle.webmvc.support.helper.PopulateHelper
 import org.openurp.base.model.Project
 import org.openurp.base.std.model.Student

@@ -17,7 +17,7 @@
     [@b.col width="15%" property="courseType.name" title="课程类别" /]
     [@b.col width="10%" title="授课教师"][@getTeacherNames clazz.teachers/][/@]
     [@b.col width="12%" title="第一次上课日期"]
-      [#if table.timePublished]${(clazz.schedule.firstDate?string("yyyy-MM-dd"))!}[#else]尚未发布[/#if]
+      [#if table.timePublished]${(clazz.schedule.firstDateTime?string("yyyy-MM-dd"))!}[#else]尚未发布[/#if]
     [/@]
     [@b.col width="12%" property="remark" title="备注"]
        ${clazz.remark!}
