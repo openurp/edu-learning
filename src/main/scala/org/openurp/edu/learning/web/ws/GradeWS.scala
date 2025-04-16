@@ -18,12 +18,13 @@
 package org.openurp.edu.learning.web.ws
 
 import org.beangle.commons.bean.Properties
+import org.beangle.commons.json.JsonObject
 import org.beangle.commons.lang.Strings
 import org.beangle.commons.lang.reflect.BeanInfos
 import org.beangle.commons.lang.reflect.TypeInfo.IterableType
 import org.beangle.data.dao.EntityDao
-import org.beangle.data.jsonapi.JsonAPI
-import org.beangle.data.jsonapi.JsonAPI.Context
+import org.beangle.data.json.JsonAPI
+import org.beangle.data.json.JsonAPI.Context
 import org.beangle.security.Securities
 import org.beangle.webmvc.annotation.response
 import org.beangle.webmvc.context.{ActionContext, Params}
@@ -40,7 +41,7 @@ class GradeWS extends ActionSupport {
   var courseGradeProvider: CourseGradeProvider = _
 
   @response
-  def index(): JsonAPI.Json = {
+  def index(): JsonObject = {
     val stds = entityDao.findBy(classOf[Student], "user.code", Securities.user)
     val grades = courseGradeProvider.getPublished(stds.head)
 
