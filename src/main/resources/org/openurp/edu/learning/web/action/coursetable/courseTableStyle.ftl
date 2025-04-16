@@ -62,9 +62,9 @@
   [#list table.activities as s]
     [#if table.category=="squad"]
       [#assign c=s.clazz.course]
-      activity = table${tableIndex}.newActivity("[@getListPropertyId s.teachers/]","[@getTeacherNames s.teachers/]","${c.id}(${(s.clazz.crn)!})","${c.name}(${(s.clazz.crn)!})","[@getListPropertyId s.rooms/]","[#if table.placePublished][@getListName s.rooms/][/#if]","${s.time.startOn?string('yyyy-MM-dd')}",${s.time.weekstate.value});
+      activity = table${tableIndex}.newActivity("[@getListPropertyId s.teachers/]","[@getTeacherNames s.teachers/]","${c.id}(${(s.clazz.crn)!})","${c.name}(${(s.clazz.crn)!})[#if s.remark??]<br/>(${s.remark})[/#if]","[@getListPropertyId s.rooms/]","[#if table.placePublished][@getListName s.rooms/][/#if]","${s.time.startOn?string('yyyy-MM-dd')}",${s.time.weekstate.value});
     [#else]
-      activity = table${tableIndex}.newActivity("[@getListPropertyId s.teachers/]","[@getTeacherNames s.teachers/]","${s.clazz.course.id}(${(s.clazz.crn)!})","${s.clazz.course.name}(${(s.clazz.crn)!})","[@getListPropertyId s.rooms/]","[#if table.placePublished][@getListName s.rooms/][/#if]","${s.time.startOn?string('yyyy-MM-dd')}",${s.time.weekstate.value});
+      activity = table${tableIndex}.newActivity("[@getListPropertyId s.teachers/]","[@getTeacherNames s.teachers/]","${s.clazz.course.id}(${(s.clazz.crn)!})","${s.clazz.course.name}(${(s.clazz.crn)!})[#if s.remark??]<br/>(${s.remark})[/#if]","[@getListPropertyId s.rooms/]","[#if table.placePublished][@getListName s.rooms/][/#if]","${s.time.startOn?string('yyyy-MM-dd')}",${s.time.weekstate.value});
     [/#if]
     table${tableIndex}.addActivityByTime(activity,${s.time.weekday.id},${s.time.beginAt.value},${s.time.endAt.value});
   [/#list]

@@ -1,4 +1,3 @@
-import org.openurp.parent.Dependencies.*
 import org.openurp.parent.Settings.*
 
 ThisBuild / organization := "org.openurp.edu.learning"
@@ -23,10 +22,10 @@ ThisBuild / developers := List(
 ThisBuild / description := "OpenURP Edu Learning"
 ThisBuild / homepage := Some(url("http://openurp.github.io/edu-learning/index.html"))
 
-val apiVer = "0.41.14"
-val starterVer = "0.3.51"
-val baseVer = "0.4.46"
-val eduCoreVer = "0.3.7"
+val apiVer = "0.42.0"
+val starterVer = "0.3.54"
+val baseVer = "0.4.48"
+val eduCoreVer = "0.3.8"
 
 val openurp_edu_api = "org.openurp.edu" % "openurp-edu-api" % apiVer
 val openurp_std_api = "org.openurp.std" % "openurp-std-api" % apiVer
@@ -40,5 +39,5 @@ lazy val web = (project in file("."))
     name := "openurp-edu-learning-webapp",
     common,
     libraryDependencies ++= Seq(openurp_stater_web, openurp_edu_core, openurp_std_api),
-    libraryDependencies ++= Seq(openurp_edu_api, beangle_ems_app, openurp_base_tag)
+    libraryDependencies ++= Seq(openurp_edu_api, openurp_base_tag)
   )
