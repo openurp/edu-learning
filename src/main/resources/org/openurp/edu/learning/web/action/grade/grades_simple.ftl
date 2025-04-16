@@ -6,7 +6,13 @@
     [@b.col width="4%" title="序号"]${grade_index+1}[/@]
     [@b.col width="180px" title="学年学期"]${grade.semester.schoolYear}学年 ${semesterNames[grade.semester.name]!grade.semester.name}[/@]
     [@b.col title="课程名称"]${grade.course.name}[/@]
-
+    [@b.col title="任课教师" width="10%"]
+      [#if grade.clazz??]
+        [#list grade.clazz.teachers as t]${t.name}[#sep],[/#list]
+      [#else]
+      --
+      [/#if]
+    [/@]
     [@b.col width="5%" title="学分"]${(grade.course.getCredits(grade.std.level))!}[/@]
     [@b.col title="修读类别" width="8%"]
       [#if grade.courseTakeType?? && grade.courseTakeType.id !=1]
