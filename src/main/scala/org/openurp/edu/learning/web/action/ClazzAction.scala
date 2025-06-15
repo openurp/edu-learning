@@ -28,7 +28,6 @@ import org.openurp.edu.clazz.config.ScheduleSetting
 import org.openurp.edu.clazz.domain.ClazzProvider
 import org.openurp.edu.clazz.model.*
 import org.openurp.edu.course.model.ClazzPlan
-import org.openurp.edu.textbook.model.ClazzMaterial
 
 /** 学生查看单个教学任务
  * 包括课程安排详情、考试详情、通知、课程资料界面
