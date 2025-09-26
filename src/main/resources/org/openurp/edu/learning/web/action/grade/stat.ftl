@@ -31,7 +31,7 @@
               <td>${(stdSemesterGpa.semester.schoolYear)!} ${(stdSemesterGpa.semester.name)!}</td>
               <td>${(stdSemesterGpa.gradeCount)!}</td>
               <td>${(stdSemesterGpa.credits)!}</td>
-              <td>${(stdSemesterGpa.ga)!}</td>
+              <td>${(stdSemesterGpa.wms)!}</td>
               <td>${(stdSemesterGpa.gpa)!}</td>
             </tr>
           [/#list]
@@ -46,7 +46,7 @@
               <td>在校汇总</td>
               <td>${stdGpa.gradeCount!}</td>
               <td>${stdGpa.credits!}</td>
-              <td>${stdGpa.ga!}</td>
+              <td>${stdGpa.wms!}</td>
               <td>${stdGpa.gpa!}</td>
           </tr>
       [#if isDouble]
@@ -60,7 +60,7 @@
   </table>
   </td>
   <td style="vertical-align:top">
-  <div id="holder" style="width:400px;height:200px"></div>
+    <div id="holder" style="width:400px;height:200px"></div>
   </td>
  </tr>
 </table>
