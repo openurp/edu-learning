@@ -1,7 +1,7 @@
 import org.openurp.parent.Settings.*
 
 ThisBuild / organization := "org.openurp.edu.learning"
-ThisBuild / version := "0.0.18"
+ThisBuild / version := "0.0.19-SNAPSHOT"
 
 ThisBuild / scmInfo := Some(
   ScmInfo(
