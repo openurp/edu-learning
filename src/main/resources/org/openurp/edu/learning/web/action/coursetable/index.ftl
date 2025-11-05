@@ -43,5 +43,6 @@
        bg.form.submit(form,'${b.url("!index")}');
      }
  </script>
+[@include_optional path="comment.ftl"/]
 </div>
 [@b.foot/]
