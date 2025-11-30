@@ -43,7 +43,7 @@ class GradeWS extends ActionSupport {
   @response
   def index(): JsonObject = {
     val stds = entityDao.findBy(classOf[Student], "user.code", Securities.user)
-    val grades = courseGradeProvider.getPublished(stds.head)
+    val grades = courseGradeProvider.get(stds.head)
 
     given context: Context = JsonAPI.context(ActionContext.current.params)
 

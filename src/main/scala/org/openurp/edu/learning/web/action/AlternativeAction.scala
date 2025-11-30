@@ -93,7 +93,7 @@ class AlternativeAction extends StudentSupport, EntityAction[CourseAlternativeAp
 
   def gradeScores(std: Student): collection.Map[Course, String] = {
     val scores = Collections.newMap[Course, String]
-    val grades = courseGradeProvider.getPublished(std)
+    val grades = courseGradeProvider.get(std)
     grades foreach { g =>
       if (g.passed) {
         scores.put(g.course, g.scoreText.getOrElse("--"))

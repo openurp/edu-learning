@@ -19,12 +19,15 @@ package org.openurp.edu.learning.web.action
 
 import org.beangle.commons.bean.orderings.PropertyOrdering
 import org.beangle.commons.collection.Collections
+import org.beangle.data.dao.OqlBuilder
 import org.beangle.webmvc.view.View
 import org.openurp.base.model.{Project, Semester}
 import org.openurp.base.std.model.Student
 import org.openurp.code.edu.model.GradeType
 import org.openurp.edu.grade.domain.CourseGradeProvider
 import org.openurp.edu.grade.model.{CourseGrade, StdGpa}
+import org.openurp.edu.learning.web.helper.RankHelper
+import org.openurp.starter.web.helper.ProjectProfile
 import org.openurp.starter.web.support.StudentSupport
 
 import scala.collection.mutable
@@ -34,7 +37,7 @@ class GradeAction extends StudentSupport {
   var courseGradeProvider: CourseGradeProvider = null
 
   protected override def projectIndex(std: Student): View = {
-    val grades = courseGradeProvider.getPublished(std)
+    val grades = courseGradeProvider.get(std)
     put("stdGpa", entityDao.findBy(classOf[StdGpa], "std", std).headOption)
     val gradeTypes = codeService.get(classOf[GradeType], GradeType.Usual, GradeType.Middle, GradeType.End, GradeType.Makeup, GradeType.Delay, GradeType.EndGa)
     val publishedGradeTypes = Collections.newSet[GradeType]
@@ -59,4 +62,32 @@ class GradeAction extends StudentSupport {
     forward()
   }
 
+  /** 平均绩点、平均分证明
+   *
+   * @return
+   */
+  def gpaCertificate(): View = {
+    forward()
+  }
+
+  /** 专业排名证明
+   *
+   * @return
+   */
+  def rankCertificate(): View = {
+    val std = getStudent
+    val q = OqlBuilder.from(classOf[StdGpa], "sg")
+    q.where("sg.std.project=:project and sg.std.level=:level", std.project, std.level)
+    q.where("sg.std.registed=true")
+    q.where("sg.std.state.grade=:grade", std.grade)
+    q.where("sg.std.state.major=:major", std.major)
+    val stdGpas = entityDao.search(q)
+    val gpa = stdGpas.find(_.std == std).get
+    val ranks = RankHelper.getRanks(stdGpas)
+    put("rank", ranks(gpa))
+    put("majorStdCount", stdGpas.size)
+    put("stdGpa", gpa)
+    ProjectProfile.set(std.project)
+    forward()
+  }
 }
